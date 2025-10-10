@@ -580,6 +580,13 @@
                 alert('Por favor, preencha todos os campos obrigatórios');
                 return;
             }
+            // Validação de senha
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/;
+            if (!passwordRegex.test(password)) {
+                alert('A senha deve ter entre 5 e 20 caracteres e incluir pelo menos uma letra e um número.');
+                return;
+            }
+
 
             // Verificar se email já existe
             if (stateManager.userExists(email)) {
