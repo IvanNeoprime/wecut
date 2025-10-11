@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
 
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeCut - O corte perfeito, a um clique de você</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WeCut - O corte perfeito, a um clique de você</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
         .wecut-shadow {
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         }
@@ -52,162 +52,154 @@
         }
     </style>
 </head>
-
-<body class="min-h-screen bg-white">
-    <!-- Navigation -->
-    <nav id="navigation" class="border-b border-gray-200 bg-white wecut-shadow">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center cursor-pointer" id="logo">
-                    <h1 class="text-2xl font-medium text-black">WeCut</h1>
-                    <span class="ml-3 text-sm text-gray-600 hidden sm:block">O corte perfeito, a um clique de
+<body class="min-h-screen bg-white overflow-x-hidden">
+<!-- Navigation -->
+<nav class="border-b border-gray-200 bg-white wecut-shadow" id="navigation">
+<div class="max-w-7xl mx-auto px-4">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center cursor-pointer" id="logo">
+<h1 class="text-2xl font-medium text-black">WeCut</h1>
+<span class="ml-3 text-sm text-gray-600 hidden sm:block">O corte perfeito, a um clique de
                         você</span>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8" id="desktop-nav">
-                    <!-- Client Navigation -->
-                    <div id="client-nav">
-                        <button
-                            class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
-                            data-view="home-page">Início</button>
-                        <button
-                            class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
-                            data-view="search-page">
-                            <i data-lucide="search" class="w-4 h-4 inline mr-2"></i>
+</div>
+<!-- Desktop Navigation -->
+<div class="hidden md:flex items-center space-x-8" id="desktop-nav">
+<!-- Client Navigation -->
+<div id="client-nav">
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="home-page">Início</button>
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="search-page">
+<i class="w-4 h-4 inline mr-2" data-lucide="search"></i>
                             Buscar
                         </button>
-                        <button
-                            class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
-                            data-view="appointments-page">
-                            <i data-lucide="calendar" class="w-4 h-4 inline mr-2"></i>
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">
+<i class="w-4 h-4 inline mr-2" data-lucide="calendar"></i>
                             Agendamentos
                         </button>
-                    </div>
+</div>
+<!-- Professional Navigation -->
+<div class="md:hidden hidden" id="professional-nav">
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-dashboard-page">
+            Dashboard Profissional
+        </button>
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-view-profile-page">
+            Meu Perfil
+        </button>
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">
+            Agendamentos
+        </button>
 
-                    <!-- Professional Navigation -->
-                    <div id="professional-nav" class="hidden">
-                        <button
-                            class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
-                            data-view="professional-dashboard-page">Dashboard</button>
-                    </div>
+</div>
+<!-- Admin Navigation -->
+<div class="hidden" id="admin-nav">
+<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="admin-dashboard-page">Dashboard Admin</button>
+</div>
+</div>
+<!-- Right Side - Auth and User Type -->
+<div class="flex items-center space-x-4">
+<!-- Auth Buttons (não logado) -->
+<div class="hidden sm:flex items-center space-x-2" id="auth-buttons">
+<button class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="login-btn">Entrar</button>
+<button class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover" id="signup-btn">Cadastrar</button>
+</div>
+<!-- User Menu (logado) -->
+<div class="hidden" id="user-menu">
+<div class="flex items-center space-x-2">
+<span class="text-sm text-black" id="user-name"></span>
+<button class="px-3 py-1 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="logout-btn">Sair</button>
+</div>
+</div>
+<!-- Mobile Menu -->
+<button class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md" id="mobile-menu-btn">
+<i class="w-5 h-5" data-lucide="menu"></i>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
+<div class="px-4 py-3 space-y-2" id="mobile-menu-content">
 
-                    <!-- Admin Navigation -->
-                    <div id="admin-nav" class="hidden">
-                        <button
-                            class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
-                            data-view="admin-dashboard-page">Dashboard Admin</button>
-                    </div>
-                </div>
+<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="dashboard-page">Dashboard</button>
+<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-view-profile-page">Meu Perfil</button>
+<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">Agendamentos</button>
+</div>
+</div>
 
-                <!-- Right Side - Auth and User Type -->
-                <div class="flex items-center space-x-4">
-                    <!-- Auth Buttons (não logado) -->
-                    <div class="hidden sm:flex items-center space-x-2" id="auth-buttons">
-                        <button class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover"
-                            id="login-btn">Entrar</button>
-                        <button
-                            class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover"
-                            id="signup-btn">Cadastrar</button>
-                    </div>
-
-                    <!-- User Menu (logado) -->
-                    <div id="user-menu" class="hidden">
-                        <div class="flex items-center space-x-2">
-                            <span id="user-name" class="text-sm text-black"></span>
-                            <button id="logout-btn"
-                                class="px-3 py-1 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover">Sair</button>
-                        </div>
-                    </div>
-
-                    <!-- Mobile Menu -->
-                    <button class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md" id="mobile-menu-btn">
-                        <i data-lucide="menu" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Page Sections -->
-    <div id="page-container">
-        <!-- Conteúdo será carregado dinamicamente via JavaScript -->
-    </div>
-
-    <!-- Modals -->
-    <div id="professional-details-modal"
-        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="professional-details-title" class="text-xl font-bold text-black">Detalhes do Profissional</h3>
-                <button onclick="closeProfessionalDetailsModal()" class="text-gray-500 hover:text-gray-700">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <div id="professional-details-content" class="space-y-4">
-                <!-- Conteúdo será preenchido dinamicamente -->
-            </div>
-            <div class="mt-6 flex justify-end space-x-3">
-                <button id="remove-from-details"
-                    class="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded wecut-button-hover">
+<!-- Page Sections -->
+<div id="page-container">
+<!-- Conteúdo será carregado dinamicamente via JavaScript -->
+</div>
+<!-- Modals -->
+<div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex" id="professional-details-modal">
+<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
+<i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
+    </button>
+<div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+<div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
+<h3 class="text-xl font-bold text-black" id="professional-details-title">Detalhes do Profissional</h3>
+<button class="text-gray-500 hover:text-gray-700" onclick="closeProfessionalDetailsModal()">
+<i class="w-6 h-6" data-lucide="x"></i>
+</button>
+</div>
+<div class="space-y-4" id="professional-details-content">
+<!-- Conteúdo será preenchido dinamicamente -->
+</div>
+<div class="gap-3 sm:flex-row flex-col mt-6 space-x-3 justify-end flex">
+<button class="rounded sm:w-auto py-2 w-full bg-red-600 hover:bg-red-700 text-white wecut-button-hover transition-colors px-4" id="remove-from-details">
                     Remover Profissional
                 </button>
-                <button onclick="closeProfessionalDetailsModal()"
-                    class="border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded wecut-button-hover">
+<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeProfessionalDetailsModal()">
                     Fechar
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Rating Modal -->
-    <div id="rating-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-black">Avaliar Serviço</h3>
-                <button onclick="closeRatingModal()" class="text-gray-500 hover:text-gray-700">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <form id="rating-form" onsubmit="submitRating(event)">
-                <input type="hidden" id="rating-appointment-id">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-black mb-2">Avaliação</label>
-                        <div class="rating-stars text-2xl">
-                            <input type="radio" id="star5" name="rating" value="5">
-                            <label for="star5">★</label>
-                            <input type="radio" id="star4" name="rating" value="4">
-                            <label for="star4">★</label>
-                            <input type="radio" id="star3" name="rating" value="3">
-                            <label for="star3">★</label>
-                            <input type="radio" id="star2" name="rating" value="2">
-                            <label for="star2">★</label>
-                            <input type="radio" id="star1" name="rating" value="1">
-                            <label for="star1">★</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-black mb-2">Comentário (opcional)</label>
-                        <textarea id="rating-comment" rows="3"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0"
-                            placeholder="Compartilhe sua experiência..."></textarea>
-                    </div>
-                </div>
-                <div class="mt-6 flex justify-end gap-3">
-                    <button type="button" onclick="closeRatingModal()"
-                        class="border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded wecut-button-hover">Cancelar</button>
-                    <button type="submit"
-                        class="bg-black text-white hover:bg-gray-800 px-4 py-2 rounded wecut-button-hover">Enviar
+</div>
+</div>
+</div>
+<!-- Rating Modal -->
+<div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex" id="rating-modal">
+<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
+<i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
+    </button>
+<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+<div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
+<h3 class="text-xl font-bold text-black">Avaliar Serviço</h3>
+<button class="text-gray-500 hover:text-gray-700" onclick="closeRatingModal()">
+<i class="w-6 h-6" data-lucide="x"></i>
+</button>
+</div>
+<form id="rating-form" onsubmit="submitRating(event)">
+<input id="rating-appointment-id" type="hidden"/>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-black mb-2">Avaliação</label>
+<div class="rating-stars text-2xl">
+<input id="star5" name="rating" type="radio" value="5"/>
+<label for="star5">★</label>
+<input id="star4" name="rating" type="radio" value="4"/>
+<label for="star4">★</label>
+<input id="star3" name="rating" type="radio" value="3"/>
+<label for="star3">★</label>
+<input id="star2" name="rating" type="radio" value="2"/>
+<label for="star2">★</label>
+<input id="star1" name="rating" type="radio" value="1"/>
+<label for="star1">★</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-black mb-2">Comentário (opcional)</label>
+<textarea class="w-full p-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0" id="rating-comment" placeholder="Compartilhe sua experiência..." rows="3"></textarea>
+</div>
+</div>
+<div class="gap-3 sm:flex-row flex-col mt-6 justify-end flex">
+<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeRatingModal()" type="button">Cancelar</button>
+<button class="hover:bg-gray-800 rounded sm:w-auto py-2 w-full bg-black text-white wecut-button-hover transition-colors px-4" type="submit">Enviar
                         Avaliação</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Scripts Globais -->
-    <script>
+</div>
+</form>
+</div>
+</div>
+<!-- Scripts Globais -->
+<script>
         // State Manager
         class StateManager {
             constructor() {
@@ -284,23 +276,27 @@
                 ];
 
                 this.state.professionals = [
-                    {
-                        id: 1,
-                        userId: 3,
-                        salonId: 1,
-                        name: 'João Silva',
-                        specialty: 'Cabelereiro Profissional',
-                        description: 'Especialista em cortes masculinos clássicos e contemporâneos',
-                        services: ['Corte Masculino', 'Barba', 'Corte + Barba'],
-                        rating: 4.9,
-                        reviews: 128,
-                        image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                        profileImage: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                        price: '45,00 MT',
-                        location: 'Maputo',
-                        status: 'approved'
-                    }
-                ];
+        {
+            id: 1,
+            userId: 3,
+            salonId: 1,
+            name: 'João Silva',
+            specialty: 'Cabelereiro Profissional',
+            description: 'Especialista em cortes masculinos clássicos e contemporâneos',
+            services: [
+                { name: 'Corte Masculino', price: '45,00 MT' },
+                { name: 'Barba', price: '25,00 MT' },
+                { name: 'Corte + Barba', price: '60,00 MT' }
+            ],
+            rating: 4.9,
+            reviews: 128,
+            image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+            profileImage: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+            location: 'Maputo',
+            status: 'approved'
+        }
+    ];
+
 
                 this.state.appointments = [
                     {
@@ -803,7 +799,7 @@
                 <div class="bg-white rounded-lg border border-gray-300 shadow-sm">
                     <!-- Perfil Header -->
                     <div class="p-6 border-b border-gray-300">
-                        <div class="flex items-start gap-6">
+                        <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 w-full overflow-hidden">
                             <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-gray-300">
                                 <img 
                                     src="${professional.profileImage}" 
@@ -811,7 +807,7 @@
                                     class="w-full h-full object-cover"
                                 />
                             </div>
-                            <div class="flex-1">
+                            <div class="flex-1 min-w-0">
                                 <h2 class="text-2xl font-bold text-gray-900 mb-1">${professional.name}</h2>
                                 <p class="text-lg text-gray-600 mb-2">${professional.specialty}</p>
                                 <div class="flex items-center gap-4 mb-3">
@@ -1599,7 +1595,7 @@
                             <!-- Left Column - Profile Info -->
                             <div class="lg:col-span-2 space-y-6">
                                 <!-- Professional Header -->
-                                <div class="flex items-start gap-6">
+                                <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 w-full overflow-hidden">
                                     <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
                                         <img 
                                             src="${professional.profileImage}" 
@@ -1607,7 +1603,7 @@
                                             class="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="flex-1 min-w-0">
                                         <h1 class="text-3xl font-medium text-black mb-1">${professional.name}</h1>
                                         <p class="text-lg text-gray-600 mb-2">${salon?.name || 'Salão'}</p>
                                         <p class="text-gray-600 mb-3">${professional.specialty}</p>
@@ -1844,7 +1840,7 @@
                             <!-- Left Column - Profile Info -->
                             <div class="lg:col-span-2 space-y-6">
                                 <!-- Professional Header -->
-                                <div class="flex items-start gap-6">
+                                <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 w-full overflow-hidden">
                                     <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
                                         <img 
                                             src="${professional.profileImage}" 
@@ -1852,7 +1848,7 @@
                                             class="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="flex-1 min-w-0">
                                         <h1 class="text-3xl font-medium text-black mb-1">${professional.name}</h1>
                                         <p class="text-lg text-gray-600 mb-2">${salon?.name || 'Salão'}</p>
                                         <p class="text-gray-600 mb-3">${professional.specialty}</p>
@@ -2076,7 +2072,7 @@
                                                         />
                                                     </div>
                                                     
-                                                    <div class="flex-1">
+                                                    <div class="flex-1 min-w-0">
                                                         <div class="flex items-start justify-between mb-3">
                                                             <div>
                                                                 <h3 class="text-lg text-black">${professional?.name || 'Profissional'}</h3>
@@ -2159,7 +2155,7 @@
                                                         />
                                                     </div>
                                                     
-                                                    <div class="flex-1">
+                                                    <div class="flex-1 min-w-0">
                                                         <div class="flex items-start justify-between mb-3">
                                                             <div>
                                                                 <h3 class="text-lg text-black">${professional?.name || 'Profissional'}</h3>
@@ -3457,6 +3453,27 @@ function renderProfessionalViewProfile() {
             console.log('Usuários disponíveis:', stateManager.state.users);
         });
     </script>
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const desktopNav = document.getElementById('desktop-nav');
+  if (mobileMenuBtn && desktopNav) {
+    const menu = document.createElement('div');
+    menu.id = 'mobile-nav';
+    menu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-4 text-lg';
+    menu.innerHTML = desktopNav.innerHTML;
+    document.body.appendChild(menu);
 
+    mobileMenuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Fechar menu ao clicar em link
+    menu.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => menu.classList.add('hidden'));
+    });
+  }
+});
+</script>
+</body>
 </html>
