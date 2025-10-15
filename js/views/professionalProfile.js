@@ -2,9 +2,24 @@
 import { appState } from '../state/appState.js';
 import { renderView } from '../main.js';
 
-export function getProfessionalProfileContent() {
-    const professional = appState.professionals[0]; // Para simplificar, pegamos o primeiro profissional
-    
+async function loadTranslations() {
+    try {
+        const response = await fetch('../translations/pt.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Could not load translations:", error);
+        return {}; // Retorna um objeto vazio em caso de erro para evitar que a aplicação quebre
+    }
+}
+
+export async function getProfessionalProfileContent() {
+    const professional = appState.professionals[0];
+    const translations = await loadTranslations();
+    const profileTranslations = translations.professionalProfile || {};
+
     return `
         <div class="min-h-screen bg-white">
             <div class="max-w-6xl mx-auto">
@@ -60,7 +75,7 @@ export function getProfessionalProfileContent() {
                                     </div>
                                 </div>
 
-                                <p class="text-gray-700 mb-4">Profissional apaixonado por criar looks únicos e modernos. Especializo-me em cortes masculinos clássicos e contemporâneos, sempre buscando a excelência no atendimento aos meus clientes em Maputo.</p>
+                                <p class="text-gray-700 mb-4">${profileTranslations.description || 'Descrição não disponível.'}</p>
 
                                 <div class="flex items-center gap-4 text-sm text-gray-600">
                                     <div class="flex items-center gap-1">

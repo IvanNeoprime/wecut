@@ -1,85 +1,42 @@
 // js/views/home.js
-import { appState } from '../state/appState.js';
+import { stateManager } from '../state.js';
 import { renderView } from '../main.js';
+import { getCitiesSection } from '../components/cities-section.js';
 
 export function getHomePageContent() {
+    const professionals = stateManager.getApprovedProfessionals();
+
     return `
         <div class="min-h-screen bg-white">
             <!-- Hero Section -->
             <section class="bg-white py-20">
                 <div class="max-w-7xl mx-auto px-4 text-center">
-                    <style>
-                        .typewriter h1 {
-                            overflow: hidden;
-                            border-right: .15em solid black;
-                            white-space: nowrap;
-                            margin: 0 auto;
-                            letter-spacing: .15em;
-                            animation: 
-                                typing 3.5s steps(40, end),
-                                blink-caret .75s step-end infinite;
-                        }
-
-                        @keyframes typing {
-                            from { width: 0 }
-                            to { width: 100% }
-                        }
-
-                        @keyframes blink-caret {
-                            from, to { border-color: transparent }
-                            50% { border-color: black; }
-                        }
-                    </style>
-                    
-                    <div class="typewriter mb-6">
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black inline-block">
-                            Encontre o seu cabeleireiro ideal em Moçambique
-                        </h1>
-                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
+                        Encontre o salão perfeito<br>para o seu estilo
+                    </h1>
                     
                     <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                        Descubra profissionais talentosos em Maputo, Beira, Nampula e outras cidades. 
+                        Descubra os melhores profissionais de beleza perto de você.<br>
                         Agende seu próximo corte com facilidade e segurança.
                     </p>
                     
                     <!-- Search Bar -->
                     <div class="max-w-4xl mx-auto mb-8">
                         <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Serviço</label>
-                                    <select class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-black focus:ring-0">
-                                        <option value="">Todos os serviços</option>
-                                        <option value="corte-masculino">Corte Masculino</option>
-                                        <option value="corte-feminino">Corte Feminino</option>
-                                        <option value="barba">Barba</option>
-                                        <option value="coloracao">Coloração</option>
-                                        <option value="trancas">Tranças</option>
-                                        <option value="manicure">Manicure</option>
-                                        <option value="pedicure">Pedicure</option>
-                                    </select>
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <div class="flex-1 relative">
+                                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                                    <input 
+                                        type="text"
+                                        placeholder="Pesquisar salão ou profissional..."
+                                        class="w-full pl-10 h-12 border border-gray-300 rounded-lg focus:border-black focus:ring-0"
+                                        id="home-search-input"
+                                    />
                                 </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Localização</label>
-                                    <input type="text" 
-                                           class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-black focus:ring-0" 
-                                           placeholder="Cidade ou bairro">
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Data</label>
-                                    <input type="date" 
-                                           class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:border-black focus:ring-0">
-                                </div>
-                                
-                                <div class="flex items-end">
-                                    <button onclick="renderView('search-page')" 
-                                            class="w-full bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors wecut-button-hover font-medium">
-                                        <i data-lucide="search" class="w-4 h-4 inline mr-2"></i>
-                                        Buscar
-                                    </button>
-                                </div>
+                                <button onclick="performHomeSearch()" 
+                                        class="bg-black text-white hover:bg-gray-800 h-12 px-8 rounded-lg wecut-button-hover font-medium">
+                                    Buscar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -138,11 +95,11 @@ export function getHomePageContent() {
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${appState.professionals.filter(pro => pro.status === 'approved').slice(0, 3).map(professional => `
+                        ${professionals.slice(0, 3).map(professional => `
                             <div class="border border-gray-300 rounded-xl hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden group">
                                 <div class="aspect-[4/3] relative overflow-hidden">
                                     <img 
-                                        src="${professional.image}" 
+                                        src="${professional.profileImage}" 
                                         alt="${professional.name}"
                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                     />
@@ -239,23 +196,7 @@ export function getHomePageContent() {
             </section>
 
             <!-- Cities Section -->
-            <section class="py-16 bg-white">
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-black mb-4">Disponível nas Principais Cidades</h2>
-                        <p class="text-gray-600 text-lg">Encontre profissionais de qualidade em todo Moçambique</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        ${['Maputo', 'Matola', 'Beira', 'Nampula', 'Quelimane', 'Tete', 'Xai-Xai', 'Inhambane', 'Lichinga', 'Pemba', 'Chimoio', 'Nacala'].map(city => `
-                            <div class="text-center p-4 border border-gray-200 rounded-lg hover:border-black transition-colors cursor-pointer">
-                                <i data-lucide="map-pin" class="w-6 h-6 text-red-500 mx-auto mb-2"></i>
-                                <span class="text-black font-medium">${city}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            </section>
+            ${getCitiesSection()}
 
             <!-- CTA Section -->
             <section class="py-20 bg-black">
@@ -271,7 +212,7 @@ export function getHomePageContent() {
                                 class="bg-white text-black px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors wecut-button-hover font-medium">
                             Encontrar Profissionais
                         </button>
-                        ${!appState.currentUser ? `
+                        ${!stateManager.state.currentUser ? `
                             <button onclick="renderView('login-page')" 
                                     class="border border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-black transition-colors wecut-button-hover font-medium">
                                 Criar Conta
@@ -283,22 +224,3 @@ export function getHomePageContent() {
         </div>
     `;
 }
-
-export function viewProfessional(professionalId) {
-    appState.bookingProfessionalId = professionalId;
-    renderView('professional-profile-page');
-}
-
-export function startBooking(professionalId) {
-    if (!appState.currentUser) {
-        alert('Por favor, faça login para agendar um serviço.');
-        renderView('login-page');
-        return;
-    }
-    appState.bookingProfessionalId = professionalId;
-    renderView('booking-page');
-}
-
-// Adicionar funções ao escopo global
-window.viewProfessional = viewProfessional;
-window.startBooking = startBooking;
