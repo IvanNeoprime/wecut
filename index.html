@@ -54,9 +54,19 @@
     </div>
 
     <div class="v27-auth items-center">
-      <div id="auth-buttons" class="flex items-center gap-2">
+      <!-- Botões para usuários NÃO autenticados - inicialmente escondidos -->
+      <div id="auth-buttons" class="hidden flex items-center gap-2">
         <button id="login-btn" class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover">Entrar</button>
         <button id="signup-btn" class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover">Cadastrar</button>
+      </div>
+
+      <!-- Menu para usuários autenticados - inicialmente escondido -->
+      <div id="user-menu" class="hidden flex items-center gap-2">
+        <button id="user-profile-btn" class="flex items-center gap-2 px-3 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover">
+          <i class="w-4 h-4" data-lucide="user"></i>
+          <span id="user-name">Usuário</span>
+        </button>
+        <button id="logout-btn" class="px-3 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover">Sair</button>
       </div>
 
       <button id="v27-mobile-btn" class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md" aria-label="Abrir menu">
@@ -66,95 +76,155 @@
   </div>
 </nav>
 
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  // Estado de autenticação - substitua pela sua lógica real do Firebase
+  let isAuthenticated = false;
+  
+  // Função para verificar autenticação (substitua pela lógica real do Firebase)
+  function checkAuthState() {
+    // Simulação da verificação do Firebase
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // Aqui você implementaria a verificação real do Firebase
+        // firebase.auth().onAuthStateChanged((user) => { ... })
+        
+        // Para demonstração, vamos usar um estado fixo
+        // Altere para true para ver o menu do usuário
+        isAuthenticated = false;
+        
+        resolve();
+      }, 100);
+    });
+  }
+
+  // Função para atualizar a UI baseada no estado de autenticação
+  function updateAuthUI() {
+    const authButtons = document.getElementById('auth-buttons');
+    const userMenu = document.getElementById('user-menu');
+    
+    if (isAuthenticated) {
+      authButtons.classList.add('hidden');
+      userMenu.classList.remove('hidden');
+    } else {
+      authButtons.classList.remove('hidden');
+      userMenu.classList.add('hidden');
+    }
+  }
+
+  // Inicialização
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Inicializar ícones
     if(window.lucide && typeof lucide.createIcons==='function') lucide.createIcons();
+    
+    // Verificar estado de autenticação
+    await checkAuthState();
+    
+    // Atualizar UI após verificação
+    updateAuthUI();
+    
+    // Event listeners para os botões de autenticação
+    document.getElementById('login-btn')?.addEventListener('click', () => {
+      // Implementar lógica de login
+      console.log('Login clicado');
+    });
+    
+    document.getElementById('signup-btn')?.addEventListener('click', () => {
+      // Implementar lógica de cadastro
+      console.log('Cadastrar clicado');
+    });
+    
+    document.getElementById('logout-btn')?.addEventListener('click', () => {
+      // Implementar lógica de logout
+      isAuthenticated = false;
+      updateAuthUI();
+    });
   });
 </script>
 
-</body>
-</html>
-
+<!-- Resto do código permanece igual -->
 <div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
-<div class="px-4 py-3 space-y-2" id="mobile-menu-content">
-<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="dashboard-page">Dashboard</button>
-<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-view-profile-page">Meu Perfil</button>
-<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">Agendamentos</button>
+  <div class="px-4 py-3 space-y-2" id="mobile-menu-content">
+    <button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="dashboard-page">Dashboard</button>
+    <button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-view-profile-page">Meu Perfil</button>
+    <button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">Agendamentos</button>
+  </div>
 </div>
-</div>
+
 <!-- Page Sections -->
 <div id="page-container">
-<!-- Conteúdo será carregado dinamicamente via JavaScript -->
+  <!-- Conteúdo será carregado dinamicamente via JavaScript -->
 </div>
+
 <!-- Modals -->
 <div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex" id="professional-details-modal">
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
-<i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
-    </button>
-<div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-<div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
-<h3 class="text-xl font-bold text-black" id="professional-details-title">Detalhes do Profissional</h3>
-<button class="text-gray-500 hover:text-gray-700" onclick="closeProfessionalDetailsModal()">
-<i class="w-6 h-6" data-lucide="x"></i>
-</button>
+  <button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
+    <i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
+  </button>
+  <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+    <div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
+      <h3 class="text-xl font-bold text-black" id="professional-details-title">Detalhes do Profissional</h3>
+      <button class="text-gray-500 hover:text-gray-700" onclick="closeProfessionalDetailsModal()">
+        <i class="w-6 h-6" data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="space-y-4" id="professional-details-content">
+      <!-- Conteúdo será preenchido dinamicamente -->
+    </div>
+    <div class="gap-3 sm:flex-row flex-col mt-6 space-x-3 justify-end flex">
+      <button class="rounded sm:w-auto py-2 w-full bg-red-600 hover:bg-red-700 text-white wecut-button-hover transition-colors px-4" id="remove-from-details">
+        Remover Profissional
+      </button>
+      <button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeProfessionalDetailsModal()">
+        Fechar
+      </button>
+    </div>
+  </div>
 </div>
-<div class="space-y-4" id="professional-details-content">
-<!-- Conteúdo será preenchido dinamicamente -->
-</div>
-<div class="gap-3 sm:flex-row flex-col mt-6 space-x-3 justify-end flex">
-<button class="rounded sm:w-auto py-2 w-full bg-red-600 hover:bg-red-700 text-white wecut-button-hover transition-colors px-4" id="remove-from-details">
-                    Remover Profissional
-                </button>
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeProfessionalDetailsModal()">
-                    Fechar
-                </button>
-</div>
-</div>
-</div>
+
 <!-- Rating Modal -->
 <div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex" id="rating-modal">
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
-<i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
-    </button>
-<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-<div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
-<h3 class="text-xl font-bold text-black">Avaliar Serviço</h3>
-<button class="text-gray-500 hover:text-gray-700" onclick="closeRatingModal()">
-<i class="w-6 h-6" data-lucide="x"></i>
-</button>
+  <button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
+    <i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
+  </button>
+  <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+    <div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
+      <h3 class="text-xl font-bold text-black">Avaliar Serviço</h3>
+      <button class="text-gray-500 hover:text-gray-700" onclick="closeRatingModal()">
+        <i class="w-6 h-6" data-lucide="x"></i>
+      </button>
+    </div>
+    <form id="rating-form" onsubmit="submitRating(event)">
+      <input id="rating-appointment-id" type="hidden"/>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-black mb-2">Avaliação</label>
+          <div class="rating-stars text-2xl">
+            <input id="star5" name="rating" type="radio" value="5"/>
+            <label for="star5">★</label>
+            <input id="star4" name="rating" type="radio" value="4"/>
+            <label for="star4">★</label>
+            <input id="star3" name="rating" type="radio" value="3"/>
+            <label for="star3">★</label>
+            <input id="star2" name="rating" type="radio" value="2"/>
+            <label for="star2">★</label>
+            <input id="star1" name="rating" type="radio" value="1"/>
+            <label for="star1">★</label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-black mb-2">Comentário (opcional)</label>
+          <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0" id="rating-comment" placeholder="Compartilhe sua experiência..." rows="3"></textarea>
+        </div>
+      </div>
+      <div class="gap-3 sm:flex-row flex-col mt-6 justify-end flex">
+        <button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeRatingModal()" type="button">Cancelar</button>
+        <button class="hover:bg-gray-800 rounded sm:w-auto py-2 w-full bg-black text-white wecut-button-hover transition-colors px-4" type="submit">Enviar Avaliação</button>
+      </div>
+    </form>
+  </div>
 </div>
-<form id="rating-form" onsubmit="submitRating(event)">
-<input id="rating-appointment-id" type="hidden"/>
-<div class="space-y-4">
-<div>
-<label class="block text-sm font-medium text-black mb-2">Avaliação</label>
-<div class="rating-stars text-2xl">
-<input id="star5" name="rating" type="radio" value="5"/>
-<label for="star5">★</label>
-<input id="star4" name="rating" type="radio" value="4"/>
-<label for="star4">★</label>
-<input id="star3" name="rating" type="radio" value="3"/>
-<label for="star3">★</label>
-<input id="star2" name="rating" type="radio" value="2"/>
-<label for="star2">★</label>
-<input id="star1" name="rating" type="radio" value="1"/>
-<label for="star1">★</label>
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium text-black mb-2">Comentário (opcional)</label>
-<textarea class="w-full p-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0" id="rating-comment" placeholder="Compartilhe sua experiência..." rows="3"></textarea>
-</div>
-</div>
-<div class="gap-3 sm:flex-row flex-col mt-6 justify-end flex">
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeRatingModal()" type="button">Cancelar</button>
-<button class="hover:bg-gray-800 rounded sm:w-auto py-2 w-full bg-black text-white wecut-button-hover transition-colors px-4" type="submit">Enviar
-                        Avaliação</button>
-</div>
-</form>
-</div>
-</div>
+</body>
+</html>
 <!-- Scripts Globais -->
 <script>
         // State Manager
