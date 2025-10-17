@@ -1,746 +1,81 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>WeCut - O corte perfeito, a um clique de você</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<style>
-        .wecut-shadow {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WeCut</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    :root { --nav-height: 64px; }
+    nav.v27-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; height: var(--nav-height);
+      background: #fff; position: fixed; top: 0; left: 0; z-index: 50;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      padding: 0.5rem 1rem;
+    }
+    body { padding-top: var(--nav-height); }
 
-        .wecut-button-hover:hover {
-            transform: translateY(-1px);
-            transition: all 0.2s ease;
-        }
+    .v27-container { display: flex; align-items: center; width: 100%; max-width: 1280px; margin: 0 auto; gap: 1rem; }
+    .v27-logo { flex: 0 0 auto; margin-right: auto; display: flex; align-items: center; gap: .5rem; }
+    .v27-center { flex: 1 1 auto; display: flex; justify-content: center; gap: 1.25rem; }
+    .v27-auth { flex: 0 0 auto; margin-left: auto; display: flex; gap: .5rem; align-items: center; }
+    .v27-auth button { white-space: nowrap; }
 
-        .hidden {
-            display: none;
-        }
+    #v27-mobile-btn { display: none; }
 
-        .active-page {
-            display: block;
-        }
+    @media(max-width:768px) {
+      .v27-center { display: none; }
+      #v27-mobile-btn { display: block; }
+      .v27-auth { order: 2; margin-left: 0; margin-right: .5rem; }
+      .v27-logo { order: 1; }
+      #v27-mobile-btn { order: 3; }
+    }
 
-        .active-nav {
-            background-color: #f9fafb;
-        }
+    .wecut-button-hover { transition: all .15s ease; }
+    .wecut-button-hover:hover { transform: translateY(-1px); }
+  </style>
+</head>
+<body class="bg-gray-50">
 
-        .rating-stars {
-            display: inline-flex;
-            gap: 2px;
-            flex-direction: row-reverse;
-        }
+<nav class="v27-nav" id="navigation">
+  <div class="v27-container">
+    <div id="logo" class="v27-logo cursor-pointer">
+      <h1 class="text-2xl font-medium text-black">WeCut</h1>
+    </div>
 
-        .rating-stars input {
-            display: none;
-        }
+    <div id="desktop-nav" class="v27-center hidden md:flex">
+      <div id="client-nav" class="flex items-center gap-2">
+        <button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="home-page">Início</button>
+        <button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="search-page">Buscar</button>
+        <button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">Agendamentos</button>
+      </div>
+    </div>
 
-        .rating-stars label {
-            cursor: pointer;
-            color: #d1d5db;
-            transition: color 0.2s;
-        }
+    <div class="v27-auth items-center">
+      <div id="auth-buttons" class="flex items-center gap-2">
+        <button id="login-btn" class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover">Entrar</button>
+        <button id="signup-btn" class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover">Cadastrar</button>
+      </div>
 
-        .rating-stars input:checked~label,
-        .rating-stars label:hover,
-        .rating-stars label:hover~label {
-            color: #fbbf24;
-        }
-    </style>
-<style>
-/* 🌐 Responsividade Global - v16 */
-
-/* Corrige largura geral e remove rolagem lateral */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* Navbar - apenas logo, botão de menu e sair visíveis */
-nav .nav-links {
-  display: none !important;
-}
-nav .hamburger-menu {
-  display: block !important;
-}
-@media (min-width: 1024px) {
-  nav .nav-links {
-    display: flex !important;
-  }
-  nav .hamburger-menu {
-    display: none !important;
-  }
-}
-
-/* Menu mobile (abre com o botão hambúrguer) */
-#mobile-menu {
-  display: none;
-}
-#mobile-menu.active {
-  display: block !important;
-}
-
-/* Layout fluido para containers principais */
-.container, .page-container, .content-wrapper, .main-container, section {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-/* Ajustes responsivos globais */
-@media (max-width: 720px) {
-  .flex-responsive {
-    flex-direction: column !important;
-  }
-  .btn-responsive {
-    width: 100% !important;
-  }
-  .grid-responsive {
-    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-  }
-}
-@media (min-width: 721px) and (max-width: 1023px) {
-  .grid-responsive {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-}
-@media (min-width: 1024px) {
-  .grid-responsive {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-}
-
-/* Imagens e mídias fluidas */
-img, video, iframe {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Tipografia fluida */
-h1 { font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem); }
-h2 { font-size: clamp(1.25rem, 1.5vw + 0.8rem, 2rem); }
-p, a, li, span, button {
-  font-size: clamp(0.9rem, 1vw + 0.4rem, 1.1rem);
-  line-height: 1.5;
-}
-
-/* Botões adaptáveis */
-button, .btn, .wecut-button-hover {
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s ease-in-out;
-  width: auto;
-}
-@media (max-width: 720px) {
-  button, .btn, .wecut-button-hover {
-    width: 100%;
-  }
-}
-
-/* Margens e espaçamentos */
-.section, .block {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-@media (min-width: 1024px) {
-  .section, .block {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-}
-
-/* Footer e navbar alinhados corretamente */
-footer, nav {
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Correção para títulos e textos em telas pequenas */
-@media (max-width: 480px) {
-  h1, h2, h3 {
-    text-align: center;
-  }
-  .text-left {
-    text-align: center !important;
-  }
-}
-</style><style>
-/* ===== Fix específico para Results/Search layout (v17) ===== */
-/* Force search container to use full width and avoid extra centering */
-#search-results, #search-results > div {
-  box-sizing: border-box;
-}
-
-/* Make each result card fluid on small screens */
-#search-results > div {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 0.75rem;
-}
-
-/* Image container responsiveness */
-#search-results .w-32 {
-  min-width: 96px;
-  max-width: 128px;
-  width: 28%;
-  height: auto;
-  flex: 0 0 auto;
-}
-
-/* Ensure image scales within its box */
-#search-results .w-32 img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Content area should not overflow */
-#search-results .flex-1 {
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-/* Reduce paddings inside cards on small screens */
-@media (max-width: 820px) {
-  /* Stack card vertically */
-  #search-results > div {
-    flex-direction: column;
-  }
-  /* Make image full width on top */
-  #search-results .w-32 {
-    width: 100% !important;
-    min-width: 0 !important;
-    height: 180px !important;
-  }
-  #search-results .w-32 img {
-    height: 100%;
-    object-fit: cover;
-  }
-  /* Make content use full width */
-  #search-results .flex-1 {
-    width: 100% !important;
-  }
-  /* Reduce inner padding */
-  #search-results .p-4, #search-results .p-6 {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-  }
-  /* Ensure the main container fills viewport */
-  .max-w-7xl, .max-w-6xl, .max-w-4xl, .max-w-5xl, .max-w-3xl {
-    max-width: 100% !important;
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-  /* Search header controls shrink */
-  .max-w-7xl .flex .h-12, .max-w-7xl .flex input.h-12 {
-    height: 44px !important;
-  }
-}
-/* Additional safe-guards for very narrow screens */
-@media (max-width: 420px) {
-  #search-results .w-32 { height: 140px !important; }
-  #search-results .p-4, #search-results .p-6 { padding: 0.5rem !important; }
-  .max-w-7xl, .max-w-6xl { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
-}
-</style><style>
-/* === Layout atualizado da Busca (v18) === */
-#search-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  max-width: 100%;
-}
-#search-results .bg-white {
-  transition: transform 0.3s ease-in-out;
-}
-#search-results .bg-white:hover {
-  transform: translateY(-4px);
-}
-@media (max-width: 720px) {
-  #search-results {
-    grid-template-columns: 1fr;
-  }
-  #search-results .p-4 {
-    padding: 0.75rem !important;
-  }
-}
-</style><style>
-/* === Correção de sobreposição dos cards no perfil do profissional (v19) === */
-.profile-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.profile-sidebar .sticky-card {
-  position: sticky;
-  top: 1rem;
-  z-index: 10;
-}
-.profile-sidebar .sticky-card + .sticky-card {
-  position: relative !important;
-  top: auto !important;
-}
-@media (max-width: 1024px) {
-  .profile-sidebar .sticky-card {
-    position: relative !important;
-    top: auto !important;
-  }
-}
-</style><style>
-/* === Navbar layout definitivo (v21) === */
-
-/* Layout geral: logo esquerda, links centro, botão direita */
-nav {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-wrap: nowrap !important;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  background-color: inherit;
-}
-
-/* Container interno centralizado */
-nav .nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: 1rem;
-}
-
-/* Logo esquerda */
-nav .nav-logo {
-  flex: 0 0 auto;
-}
-
-/* Links centro */
-nav .nav-links {
-  flex: 1 1 auto;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 1.5rem !important;
-}
-
-/* Botão direita */
-nav .nav-actions {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Ícone do menu (hambúrguer) */
-nav .hamburger-menu {
-  display: none !important;
-}
-
-/* Responsividade: mobile */
-@media (max-width: 768px) {
-  nav {
-    flex-wrap: wrap !important;
-  }
-  nav .nav-links {
-    display: none !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    margin-top: 0.5rem;
-  }
-  nav .nav-links.active {
-    display: flex !important;
-  }
-  nav .hamburger-menu {
-    display: block !important;
-  }
-  nav .nav-actions {
-    order: 3;
-    width: 100%;
-    justify-content: flex-end;
-  }
-}
-</style><style>
-/* === Navbar centralizada e alinhada (v22) === */
-
-nav {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-wrap: nowrap !important;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: inherit;
-}
-
-/* Div interna da navbar */
-nav .nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/* Logo à esquerda */
-nav .nav-logo {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-/* Links centralizados no meio */
-nav .nav-links {
-  flex: 1 1 auto;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem !important;
-  text-align: center;
-}
-
-/* Botões à direita */
-nav .nav-actions {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-/* Ícone do menu (hambúrguer) oculto em telas grandes */
-nav .hamburger-menu {
-  display: none !important;
-}
-
-/* Responsividade: modo mobile */
-@media (max-width: 768px) {
-  nav {
-    flex-wrap: wrap !important;
-  }
-  nav .nav-links {
-    display: none !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    margin-top: 0.5rem;
-  }
-  nav .nav-links.active {
-    display: flex !important;
-  }
-  nav .hamburger-menu {
-    display: block !important;
-  }
-  nav .nav-actions {
-    order: 3;
-    width: 100%;
-    justify-content: flex-end;
-  }
-}
-</style><style>
-/* === Navbar fixa no desktop e alinhada nos cantos no mobile (v23) === */
-
-/* Base */
-nav {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: inherit;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Desktop fixo no topo */
-@media (min-width: 1024px) {
-  nav {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    z-index: 50;
-    width: 100%;
-    background-color: white !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  body {
-    padding-top: 4rem !important;
-  }
-}
-
-/* Estrutura interna */
-nav .nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/* Logo esquerda */
-nav .nav-logo {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-/* Links centralizados */
-nav .nav-links {
-  flex: 1 1 auto;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 1.5rem !important;
-  text-align: center;
-}
-
-/* Botões à direita */
-nav .nav-actions {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-/* Ícone de menu (hambúrguer) escondido no desktop */
-nav .hamburger-menu {
-  display: none !important;
-}
-
-/* Responsividade mobile */
-@media (max-width: 1024px) {
-  nav {
-    position: relative !important;
-    box-shadow: none !important;
-  }
-
-  nav .nav-links {
-    display: none !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    margin-top: 0.5rem;
-  }
-
-  nav .nav-links.active {
-    display: flex !important;
-  }
-
-  /* Logo à esquerda e menu à direita */
-  nav .nav-logo {
-    order: 1;
-    justify-content: flex-start;
-  }
-  nav .hamburger-menu {
-    display: block !important;
-    order: 2;
-    justify-content: flex-end;
-  }
-  nav .nav-actions {
-    display: none !important;
-  }
-}
-</style><style>
-/* === Navbar Mobile Ajustada: Itens lado a lado (v24) === */
-
-/* Mobile layout */
-@media (max-width: 1024px) {
-  nav {
-    position: relative !important;
-    box-shadow: none !important;
-  }
-
-  /* Links e botões em linha quando o menu abre */
-  nav .nav-links {
-    display: none !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    gap: 1rem !important;
-    margin-top: 0.5rem;
-  }
-
-  nav .nav-links.active {
-    display: flex !important;
-  }
-
-  /* Logo à esquerda e menu hambúrguer à direita */
-  nav .nav-logo {
-    order: 1;
-    justify-content: flex-start;
-  }
-  nav .hamburger-menu {
-    display: block !important;
-    order: 2;
-    justify-content: flex-end;
-  }
-
-  /* Remover empilhamento do botão “Sair” */
-  nav .nav-actions {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    width: auto !important;
-    order: 3;
-  }
-}
-</style><style>
-/* === Navbar Mobile: Botões lado a lado (v25) === */
-@media (max-width: 1024px) {
-  /* Garante que os botões fiquem em linha */
-  nav .nav-actions {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    width: 100% !important;
-    flex-wrap: wrap !important;
-    margin-top: 0.5rem !important;
-  }
-
-  /* Garante que botões ocupem o tamanho certo */
-  nav .nav-actions button,
-  nav .nav-actions a {
-    flex: 1 1 auto !important;
-    width: auto !important;
-    text-align: center;
-  }
-}
-</style><style>
-/* === Navbar Mobile: correção definitiva (v26) === */
-@media (max-width: 1024px) {
-  nav {
-    position: relative !important;
-    box-shadow: none !important;
-  }
-
-  /* Logo à esquerda */
-  nav .nav-logo {
-    order: 1 !important;
-    justify-content: flex-start !important;
-  }
-
-  /* Menu hambúrguer à direita */
-  nav .hamburger-menu {
-    display: block !important;
-    order: 2 !important;
-    justify-content: flex-end !important;
-    margin-left: auto !important;
-  }
-
-  /* Container de botões lado a lado */
-  nav .nav-actions {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    width: auto !important;
-    flex-wrap: nowrap !important;
-    order: 3 !important;
-  }
-
-  /* Botões ajustados para não expandirem 100% */
-  nav .nav-actions button,
-  nav .nav-actions a {
-    width: auto !important;
-    min-width: 80px !important;
-    text-align: center !important;
-    white-space: nowrap !important;
-  }
-
-  /* Links do menu, se existirem, centralizados abaixo */
-  nav .nav-links {
-    display: none !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    width: 100% !important;
-    margin-top: 0.5rem !important;
-  }
-  nav .nav-links.active {
-    display: flex !important;
-  }
-}
-</style></head>
-<body class="min-h-screen bg-white overflow-x-hidden">
-<!-- Navigation -->
-<nav class="flex flex-row items-center justify-between flex-wrap md:flex-nowrap px-4 py-2 w-full bg-white shadow space-x-4" id="navigation">
-<div class="max-w-7xl mx-auto px-4">
-<div class="flex items-center justify-between h-16">
-<!-- Logo -->
-<div class="flex items-center cursor-pointer" id="logo">
-<h1 class="text-2xl font-medium text-black">WeCut</h1>
-<span class="ml-3 text-sm text-gray-600 hidden sm:block">O corte perfeito, a um clique de
-                        você</span>
-</div>
-<!-- Desktop Navigation -->
-<div class="hidden md:flex items-center space-x-8" id="desktop-nav">
-<!-- Client Navigation -->
-<div id="client-nav">
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="home-page">Início</button>
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="search-page">
-<i class="w-4 h-4 inline mr-2" data-lucide="search"></i>
-                            Buscar
-                        </button>
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">
-<i class="w-4 h-4 inline mr-2" data-lucide="calendar"></i>
-                            Agendamentos
-                        </button>
-</div>
-<!-- Professional Navigation -->
-<div class="md:hidden hidden" id="professional-nav">
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-dashboard-page">
-            Dashboard Profissional
-        </button>
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-view-profile-page">
-            Meu Perfil
-        </button>
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">
-            Agendamentos
-        </button>
-</div>
-<!-- Admin Navigation -->
-<div class="hidden" id="admin-nav">
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="admin-dashboard-page">Dashboard Admin</button>
-</div>
-</div>
-<!-- Right Side - Auth and User Type -->
-<div class="flex items-center space-x-4">
-<!-- Auth Buttons (não logado) -->
-<div class="hidden sm:flex items-center space-x-2" id="auth-buttons">
-<button class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="login-btn">Entrar</button>
-<button class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover" id="signup-btn">Cadastrar</button>
-</div>
-<!-- User Menu (logado) -->
-<div class="hidden" id="user-menu">
-<div class="flex items-center space-x-2">
-<span class="text-sm text-black" id="user-name"></span>
-<button class="px-3 py-1 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="logout-btn">Sair</button>
-</div>
-</div>
-<!-- Mobile Menu -->
-<button class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md" id="mobile-menu-btn">
-<i class="w-5 h-5" data-lucide="menu"></i>
-</button>
-</div>
-</div>
-</div>
+      <button id="v27-mobile-btn" class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md" aria-label="Abrir menu">
+        <i class="w-5 h-5" data-lucide="menu"></i>
+      </button>
+    </div>
+  </div>
 </nav>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if(window.lucide && typeof lucide.createIcons==='function') lucide.createIcons();
+  });
+</script>
+
+</body>
+</html>
+
 <div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
 <div class="px-4 py-3 space-y-2" id="mobile-menu-content">
 <button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="dashboard-page">Dashboard</button>
