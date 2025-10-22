@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>WeCut</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>WeCut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
         :root {
             --nav-height: 64px;
         }
 
         /* Modal fullscreen no mobile */
-@media (max-width: 768px) {
-    #professional-details-modal {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    #professional-details-modal > div {
-        width: 100vw !important;
-        height: 100vh !important;
-        max-height: 100vh !important;
-        max-width: 100vw !important;
-        margin: 0 !important;
-        border-radius: 0 !important;
-        padding: 16px !important;
-    }
-}
+        @media (max-width: 768px) {
+            #professional-details-modal {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            #professional-details-modal>div {
+                width: 100vw !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                padding: 16px !important;
+            }
+        }
+
         nav.v27-nav {
             display: flex;
             align-items: center;
@@ -183,138 +185,240 @@
         }
 
         /* === FIM DA CORREÇÃO === */
-    
-/* === AJUSTES DE RESPONSIVIDADE E ESPAÇAMENTO === */
 
-/* Garantir que inputs longos não saiam da tela */
-#professional-edit-form input[type="text"],
-#professional-edit-form input[type="number"],
-#professional-edit-form input[type="time"],
-#professional-edit-form input[type="tel"],
-#professional-edit-form textarea {
-  max-width: 100%;
-  box-sizing: border-box;
-}
+        /* === AJUSTES DE RESPONSIVIDADE E ESPAÇAMENTO === */
 
-/* Ajustar disposição dos campos de serviço e preço em telas pequenas */
-@media (max-width: 768px) {
-  #services-list > div {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  #services-list input[name="service-price"] {
-    width: 100%;
-  }
-  #services-list button {
-    align-self: flex-end;
-  }
-}
+        /* Garantir que inputs longos não saiam da tela */
+        #professional-edit-form input[type="text"],
+        #professional-edit-form input[type="number"],
+        #professional-edit-form input[type="time"],
+        #professional-edit-form input[type="tel"],
+        #professional-edit-form textarea {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
 
-/* Garantir espaçamento consistente e evitar overflow no painel profissional */
-.professional-layout,
-#professional-edit-form,
-#professional-view-profile-page {
-  overflow-x: hidden;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
+        /* Ajustar disposição dos campos de serviço e preço em telas pequenas */
+        @media (max-width: 768px) {
+            #services-list>div {
+                flex-direction: column;
+                align-items: stretch;
+            }
 
-/* Ajustar grid e seções para telas menores */
-@media (max-width: 1024px) {
-  .grid-cols-2, .md\:grid-cols-2 {
-    grid-template-columns: 1fr;
-  }
-}
+            #services-list input[name="service-price"] {
+                width: 100%;
+            }
 
-/* Evitar que botões e campos fiquem colados */
-#professional-edit-form .flex, 
-#professional-edit-form .grid {
-  gap: 0.75rem;
-}
+            #services-list button {
+                align-self: flex-end;
+            }
+        }
 
-/* Ajuste para imagens do salão */
-@media (max-width: 640px) {
-  .grid-cols-3, .md\:grid-cols-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+        /* Garantir espaçamento consistente e evitar overflow no painel profissional */
+        .professional-layout,
+        #professional-edit-form,
+        #professional-view-profile-page {
+            overflow-x: hidden;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
 
-/* Evitar estouro horizontal em cards e formulários */
-body, html {
-  overflow-x: hidden;
-}
+        /* Ajustar grid e seções para telas menores */
+        @media (max-width: 1024px) {
 
-/* === CORREÇÃO FINAL: seção do painel profissional ocupa toda a tela === */
-.professional-layout-container,
-#page-container,
-#professional-dashboard-page,
-#professional-view-profile-page,
-#professional-edit-profile-page {
-  min-height: calc(100vh - var(--nav-height));
-  padding-top: var(--nav-height);
-  box-sizing: border-box;
-}
+            .grid-cols-2,
+            .md\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
 
-/* Garante que não haja espaço morto no topo */
-body {
-  margin: 0;
-  padding: 0;
-}
+        /* Evitar que botões e campos fiquem colados */
+        #professional-edit-form .flex,
+        #professional-edit-form .grid {
+            gap: 0.75rem;
+        }
 
-/* Em telas pequenas, assegura que o painel use a largura total */
-@media (max-width: 768px) {
-  .professional-layout,
-  #page-container {
-    width: 100%;
-    max-width: 100%;
-  }
-}
+        /* Ajuste para imagens do salão */
+        @media (max-width: 640px) {
 
-/* === NOVAS CLASSES CSS === */
-.professional-buttons-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
+            .grid-cols-3,
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
-.client-confirmation-card-static {
-  position: static !important;
-}
-</style>
+        /* Evitar estouro horizontal em cards e formulários */
+        body,
+        html {
+            overflow-x: hidden;
+        }
 
+        /* === CORREÇÃO FINAL: seção do painel profissional ocupa toda a tela === */
+        .professional-layout-container,
+        #page-container,
+        #professional-dashboard-page,
+        #professional-view-profile-page,
+        #professional-edit-profile-page {
+            min-height: calc(100vh - var(--nav-height));
+            padding-top: var(--nav-height);
+            box-sizing: border-box;
+        }
+
+        /* Garante que não haja espaço morto no topo */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Em telas pequenas, assegura que o painel use a largura total */
+        @media (max-width: 768px) {
+
+            .professional-layout,
+            #page-container {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* === BOTÕES PROFISSIONAIS — CORREÇÃO COMPLETA DE RESPONSIVIDADE === */
+        .professional-buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .professional-buttons-group button {
+            flex: 1 1 auto;
+            min-width: 120px;
+            max-width: 100%;
+        }
+
+        /* Telas muito pequenas (Samsung S8+, Itel A60s, etc.) */
+        @media (max-width: 430px) {
+            .professional-buttons-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+
+            .professional-buttons-group button {
+                width: 100% !important;
+                font-size: 0.9rem;
+                padding: 0.6rem 0.8rem;
+            }
+
+            /* Ajuste global de cards e grids */
+            .card,
+            .dashboard-section,
+            .report-card,
+            .table-responsive {
+                width: 100% !important;
+                margin: 0 auto !important;
+                padding: 0.75rem !important;
+            }
+
+            .grid,
+            .report-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            h2,
+            h3,
+            .section-title {
+                font-size: 1.1rem !important;
+                text-align: center;
+            }
+        }
+
+        /* Animações para o toast de sucesso */
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
+
 <body class="bg-gray-50">
-<nav class="v27-nav" id="navigation">
-<div class="v27-container">
-<div class="v27-logo cursor-pointer" id="logo">
-<h1 class="text-2xl font-medium text-black">WeCut</h1>
-</div>
-<div class="v27-center hidden md:flex" id="desktop-nav">
-<div class="flex items-center gap-2" id="client-nav">
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="home-page">Início</button>
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="search-page">Buscar</button>
-<button class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">Agendamentos</button>
-</div>
-</div>
-<div class="v27-auth items-center">
-<div class="hidden flex items-center gap-2" id="auth-buttons">
-<button class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="login-btn">Entrar</button>
-<button class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover" id="signup-btn">Cadastrar</button>
-</div>
-<div class="hidden flex items-center gap-2" id="user-menu">
-<button class="flex items-center gap-2 px-3 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="user-profile-btn">
-<i class="w-4 h-4" data-lucide="user"></i>
-<span id="user-name">Usuário</span>
-</button>
-<button class="px-3 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover" id="logout-btn">Sair</button>
-</div>
-<button aria-label="Abrir menu" class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md" id="v27-mobile-btn">
-<i class="w-5 h-5" data-lucide="menu"></i>
-</button>
-</div>
-</div>
-</nav>
-<script>
+    <nav class="v27-nav" id="navigation">
+        <div class="v27-container">
+            <div class="v27-logo cursor-pointer" id="logo">
+                <h1 class="text-2xl font-medium text-black">WeCut</h1>
+            </div>
+            <div class="v27-center hidden md:flex" id="desktop-nav">
+                <div class="flex items-center gap-2" id="client-nav">
+                    <button
+                        class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
+                        data-view="home-page">Início</button>
+                    <button
+                        class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
+                        data-view="search-page">Buscar</button>
+                    <button
+                        class="px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
+                        data-view="appointments-page">Agendamentos</button>
+                </div>
+            </div>
+            <div class="v27-auth items-center">
+                <div class="hidden flex items-center gap-2" id="auth-buttons">
+                    <button class="px-4 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover"
+                        id="login-btn">Entrar</button>
+                    <button
+                        class="px-4 py-2 text-sm bg-black text-white hover:bg-gray-800 rounded-md wecut-button-hover"
+                        id="signup-btn">Cadastrar</button>
+                </div>
+                <div class="hidden flex items-center gap-2" id="user-menu">
+                    <button
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover"
+                        id="user-profile-btn">
+                        <i class="w-4 h-4" data-lucide="user"></i>
+                        <span id="user-name">Usuário</span>
+                    </button>
+                    <button class="px-3 py-2 text-sm text-black hover:bg-gray-50 rounded-md wecut-button-hover"
+                        id="logout-btn">Sair</button>
+                </div>
+                <button aria-label="Abrir menu" class="md:hidden text-black hover:bg-gray-50 p-2 rounded-md"
+                    id="v27-mobile-btn">
+                    <i class="w-5 h-5" data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <script>
+
+        // === Lista de províncias de Moçambique ===
+        const MOZAMBIQUE_PROVINCES = [
+            "Cabo Delgado",
+            "Gaza",
+            "Inhambane",
+            "Manica",
+            "Maputo (Cidade)",
+            "Maputo (Província)",
+            "Nampula",
+            "Niassa",
+            "Sofala",
+            "Tete",
+            "Zambézia"
+        ];
+
         // Estado de autenticação - substitua pela sua lógica real do Firebase
         let isAuthenticated = false;
 
@@ -365,7 +469,7 @@ body {
             );
 
             const totalGanhoHoje = todayAppointments.reduce((total, apt) => {
-                return total + parsePrice(apt.total_price || apt.price || '0,00 MT');
+                return total + parsePrice(apt.price);
             }, 0);
 
             const totalGanhoHojeFormatado = totalGanhoHoje.toFixed(2).replace('.', ',') + ' MT';
@@ -413,161 +517,342 @@ body {
             // Atualizar UI após verificação
             updateAuthUI();
 
+            // **NOVO: Verificar se há link de perfil na URL**
+            checkProfileLinkOnLoad();
+
             // Event listeners para os botões de autenticação
             document.getElementById('login-btn')?.addEventListener('click', () => {
-                // Implementar lógica de login
-                console.log('Login clicado');
+                renderView('login-page');
             });
 
             document.getElementById('signup-btn')?.addEventListener('click', () => {
-                // Implementar lógica de cadastro
-                console.log('Cadastrar clicado');
+                renderView('login-page');
+                setTimeout(() => {
+                    showRegisterForm();
+                }, 100);
             });
 
             document.getElementById('logout-btn')?.addEventListener('click', () => {
-                // Implementar lógica de logout
-                isAuthenticated = false;
-                updateAuthUI();
+                handleLogout();
             });
         });
+
+        // Event listeners para os botões de autenticação
+        document.getElementById('login-btn')?.addEventListener('click', () => {
+            // Implementar lógica de login
+            console.log('Login clicado');
+        });
+
+        document.getElementById('signup-btn')?.addEventListener('click', () => {
+            // Implementar lógica de cadastro
+            console.log('Cadastrar clicado');
+        });
+
+        document.getElementById('logout-btn')?.addEventListener('click', () => {
+            // Implementar lógica de logout
+            isAuthenticated = false;
+            updateAuthUI();
+        });
+
+        // Função para gerar link único do profissional
+        function generateProfileLink(professionalId) {
+            const baseUrl = window.location.origin + window.location.pathname;
+            return `${baseUrl}?profile=${professionalId}`;
+        }
+
+        // Função para copiar link para área de transferência
+        async function shareProfileLink(professionalId) {
+            const professional = stateManager.state.professionals.find(p => p.id === professionalId);
+            if (!professional) return;
+
+            const profileLink = generateProfileLink(professionalId);
+            const shareText = `Confira o perfil de ${professional.name} no WeCut!\n${professional.specialty}\n⭐ ${professional.rating} (${professional.reviews} avaliações)\n\n${profileLink}`;
+
+            // Tentar usar Web Share API (mobile)
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: `Perfil de ${professional.name} - WeCut`,
+                        text: shareText,
+                        url: profileLink
+                    });
+                    console.log('Compartilhado com sucesso!');
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        copyToClipboard(profileLink, professional.name);
+                    }
+                }
+            } else {
+                // Fallback: copiar para área de transferência
+                copyToClipboard(profileLink, professional.name);
+            }
+        }
+
+        // Função auxiliar para copiar para clipboard
+        function copyToClipboard(text, professionalName) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showShareSuccessMessage(professionalName);
+                }).catch(() => {
+                    fallbackCopyToClipboard(text, professionalName);
+                });
+            } else {
+                fallbackCopyToClipboard(text, professionalName);
+            }
+        }
+
+        // Fallback para navegadores antigos
+        function fallbackCopyToClipboard(text, professionalName) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+                showShareSuccessMessage(professionalName);
+            } catch (err) {
+                alert('Não foi possível copiar. Link: ' + text);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        // Mostrar mensagem de sucesso
+        function showShareSuccessMessage(professionalName) {
+            // Remove mensagem anterior se existir
+            const oldMsg = document.getElementById('share-success-toast');
+            if (oldMsg) oldMsg.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'share-success-toast';
+            toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #10b981;
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 100000;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        animation: slideUp 0.3s ease-out;
+    `;
+
+            toast.innerHTML = `
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        <span>Link do perfil copiado! 🎉</span>
+    `;
+
+            document.body.appendChild(toast);
+
+            if (window.lucide) lucide.createIcons();
+
+            setTimeout(() => {
+                toast.style.animation = 'slideDown 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Função para verificar se há um profile ID na URL ao carregar a página
+        function checkProfileLinkOnLoad() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const profileId = urlParams.get('profile');
+
+            if (profileId) {
+                const professionalId = parseInt(profileId);
+                const professional = stateManager.state.professionals.find(p => p.id === professionalId);
+
+                if (professional) {
+                    // Pequeno delay para garantir que a página carregou
+                    setTimeout(() => {
+                        showProfessionalDetailsModal(professionalId);
+                    }, 500);
+                } else {
+                    alert('Profissional não encontrado.');
+                    // Limpar URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        }
+
     </script>
-<div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
-<div class="px-4 py-3 space-y-2" id="mobile-menu-content">
-<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="dashboard-page">Dashboard</button>
-<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="professional-view-profile-page">Meu Perfil</button>
-<button class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link" data-view="appointments-page">Agendamentos</button>
-</div>
-</div>
-<div id="page-container">
-</div>
-<div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex" id="professional-details-modal">
-<div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-<div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
-<h3 class="text-xl font-bold text-black" id="professional-details-title">Detalhes do Profissional</h3>
-<button class="text-gray-500 hover:text-gray-700" onclick="closeProfessionalDetailsModal()">
-<i class="w-6 h-6" data-lucide="x"></i>
-</button>
-</div>
-<div class="space-y-4" id="professional-details-content">
-</div>
-<div class="gap-3 sm:flex-row flex-col mt-6 space-x-3 justify-end flex">
-<button class="rounded sm:w-auto py-2 w-full bg-red-600 hover:bg-red-700 text-white wecut-button-hover transition-colors px-4" id="remove-from-details">
+    <div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
+        <div class="px-4 py-3 space-y-2" id="mobile-menu-content">
+            <button
+                class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
+                data-view="dashboard-page">Dashboard</button>
+            <button
+                class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
+                data-view="professional-view-profile-page">Meu Perfil</button>
+            <button
+                class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-50 wecut-button-hover nav-link"
+                data-view="appointments-page">Agendamentos</button>
+        </div>
+    </div>
+    <div id="page-container">
+    </div>
+    <div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex"
+        id="professional-details-modal">
+        <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
+                <h3 class="text-xl font-bold text-black" id="professional-details-title">Detalhes do Profissional</h3>
+                <button class="text-gray-500 hover:text-gray-700" onclick="closeProfessionalDetailsModal()">
+                    <i class="w-6 h-6" data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="space-y-4" id="professional-details-content">
+            </div>
+            <div class="gap-3 sm:flex-row flex-col mt-6 space-x-3 justify-end flex">
+                <button
+                    class="rounded sm:w-auto py-2 w-full bg-red-600 hover:bg-red-700 text-white wecut-button-hover transition-colors px-4"
+                    id="remove-from-details">
                     Remover Profissional
                 </button>
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeProfessionalDetailsModal()">
+                <button
+                    class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4"
+                    onclick="closeProfessionalDetailsModal()">
                     Fechar
                 </button>
-</div>
-</div>
-</div>
-<div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex" id="rating-modal">
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4" onclick="history.back()">
-<i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
+            </div>
+        </div>
+    </div>
+    <div class="gap-3 fixed hidden inset-0 z-50 sm:flex-row bg-opacity-50 bg-black flex-col justify-end justify-center items-center flex"
+        id="rating-modal">
+        <button
+            class="rounded hover:bg-gray-50 border sm:w-auto py-2 transition-colors mb-4 w-full border-gray-300 wecut-button-hover text-black items-center flex px-4"
+            onclick="history.back()">
+            <i class="w-4 h-4 mr-2" data-lucide="arrow-left"></i> Voltar
         </button>
-<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-<div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
-<h3 class="text-xl font-bold text-black">Avaliar Serviço</h3>
-<button class="text-gray-500 hover:text-gray-700" onclick="closeRatingModal()">
-<i class="w-6 h-6" data-lucide="x"></i>
-</button>
-</div>
-<form id="rating-form" onsubmit="submitRating(event)">
-<input id="rating-appointment-id" type="hidden"/>
-<div class="space-y-4">
-<div>
-<label class="block text-sm font-medium text-black mb-2">Avaliação</label>
-<div class="rating-stars text-2xl">
-<input id="star5" name="rating" type="radio" value="5"/>
-<label for="star5">★</label>
-<input id="star4" name="rating" type="radio" value="4"/>
-<label for="star4">★</label>
-<input id="star3" name="rating" type="radio" value="3"/>
-<label for="star3">★</label>
-<input id="star2" name="rating" type="radio" value="2"/>
-<label aria-label="2 estrelas" for="star2" title="2 estrelas">★</label>
-<input id="star1" name="rating" type="radio" value="1"/>
-<label for="star1">★</label>
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium text-black mb-2">Comentário (opcional)</label>
-<textarea class="w-full p-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0" id="rating-comment" placeholder="Compartilhe sua experiência..." rows="3"></textarea>
-</div>
-</div>
-<div class="gap-3 sm:flex-row flex-col mt-6 justify-end flex">
-<button class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4" onclick="closeRatingModal()" type="button">Cancelar</button>
-<button class="hover:bg-gray-800 rounded sm:w-auto py-2 w-full bg-black text-white wecut-button-hover transition-colors px-4" type="submit">Enviar Avaliação</button>
-</div>
-</form>
-</div>
-</div>
-<footer class="bg-gray-900 text-white mt-12 pt-16 pb-10 border-t border-indigo-500/20">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-10">
-<div class="col-span-2 md:col-span-1 space-y-4">
-<div class="flex items-center text-3xl font-extrabold text-indigo-400">
-<i class="w-7 h-7 mr-2" data-lucide="scissors"></i>
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="gap-3 mb-4 sm:flex-row flex-col justify-between justify-end items-center flex">
+                <h3 class="text-xl font-bold text-black">Avaliar Serviço</h3>
+                <button class="text-gray-500 hover:text-gray-700" onclick="closeRatingModal()">
+                    <i class="w-6 h-6" data-lucide="x"></i>
+                </button>
+            </div>
+            <form id="rating-form" onsubmit="submitRating(event)">
+                <input id="rating-appointment-id" type="hidden" />
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-black mb-2">Avaliação</label>
+                        <div class="rating-stars text-2xl">
+                            <input id="star5" name="rating" type="radio" value="5" />
+                            <label for="star5">★</label>
+                            <input id="star4" name="rating" type="radio" value="4" />
+                            <label for="star4">★</label>
+                            <input id="star3" name="rating" type="radio" value="3" />
+                            <label for="star3">★</label>
+                            <input id="star2" name="rating" type="radio" value="2" />
+                            <label aria-label="2 estrelas" for="star2" title="2 estrelas">★</label>
+                            <input id="star1" name="rating" type="radio" value="1" />
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-black mb-2">Comentário (opcional)</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:border-black focus:ring-0"
+                            id="rating-comment" placeholder="Compartilhe sua experiência..." rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="gap-3 sm:flex-row flex-col mt-6 justify-end flex">
+                    <button
+                        class="rounded hover:bg-gray-50 border sm:w-auto py-2 w-full border-gray-300 wecut-button-hover transition-colors px-4"
+                        onclick="closeRatingModal()" type="button">Cancelar</button>
+                    <button
+                        class="hover:bg-gray-800 rounded sm:w-auto py-2 w-full bg-black text-white wecut-button-hover transition-colors px-4"
+                        type="submit">Enviar Avaliação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="bg-gray-900 text-white mt-12 pt-16 pb-10 border-t border-indigo-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-10">
+                <div class="col-span-2 md:col-span-1 space-y-4">
+                    <div class="flex items-center text-3xl font-extrabold text-indigo-400">
+                        <i class="w-7 h-7 mr-2" data-lucide="scissors"></i>
                         WeCut
                     </div>
-<p class="text-gray-400 text-sm">Conectando os melhores profissionais de beleza aos clientes mais
+                    <p class="text-gray-400 text-sm">Conectando os melhores profissionais de beleza aos clientes mais
                         exigentes, de forma rápida e eficiente.</p>
-<div class="flex space-x-4 pt-2">
-<a aria-label="Facebook" class="text-gray-400 hover:text-indigo-400 transition-colors" href="#" target="_blank">
-<i class="w-5 h-5" data-lucide="facebook"></i>
-</a>
-<a aria-label="Instagram" class="text-gray-400 hover:text-indigo-400 transition-colors" href="#" target="_blank">
-<i class="w-5 h-5" data-lucide="instagram"></i>
-</a>
-<a aria-label="LinkedIn" class="text-gray-400 hover:text-indigo-400 transition-colors" href="#" target="_blank">
-<i class="w-5 h-5" data-lucide="linkedin"></i>
-</a>
-</div>
-</div>
-<div>
-<h3 class="text-lg font-semibold mb-4 text-indigo-300">Navegação</h3>
-<ul class="space-y-3 text-sm">
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="search"></i>Buscar Profissional</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="user-plus"></i>Cadastre seu Salão</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="bookmark"></i>Agendamentos</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="help-circle"></i>FAQ</a></li>
-</ul>
-</div>
-<div>
-<h3 class="text-lg font-semibold mb-4 text-indigo-300">Empresa</h3>
-<ul class="space-y-3 text-sm">
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="info"></i>Sobre Nós</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="file-text"></i>Termos de Serviço</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="shield"></i>Política de Privacidade</a></li>
-<li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i class="w-4 h-4 mr-2" data-lucide="mail"></i>Contato</a></li>
-</ul>
-</div>
-<div class="col-span-2 md:col-span-1">
-<h3 class="text-lg font-semibold mb-4 text-indigo-300">Fale Conosco</h3>
-<ul class="space-y-3 text-sm">
-<li class="flex items-start text-gray-400">
-<i class="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-indigo-400" data-lucide="map-pin"></i>
+                    <div class="flex space-x-4 pt-2">
+                        <a aria-label="Facebook" class="text-gray-400 hover:text-indigo-400 transition-colors" href="#"
+                            target="_blank">
+                            <i class="w-5 h-5" data-lucide="facebook"></i>
+                        </a>
+                        <a aria-label="Instagram" class="text-gray-400 hover:text-indigo-400 transition-colors" href="#"
+                            target="_blank">
+                            <i class="w-5 h-5" data-lucide="instagram"></i>
+                        </a>
+                        <a aria-label="LinkedIn" class="text-gray-400 hover:text-indigo-400 transition-colors" href="#"
+                            target="_blank">
+                            <i class="w-5 h-5" data-lucide="linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-indigo-300">Navegação</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="search"></i>Buscar Profissional</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="user-plus"></i>Cadastre seu Salão</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="bookmark"></i>Agendamentos</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="help-circle"></i>FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-indigo-300">Empresa</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="info"></i>Sobre Nós</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="file-text"></i>Termos de Serviço</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="shield"></i>Política de Privacidade</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition-colors flex items-center" href="#"><i
+                                    class="w-4 h-4 mr-2" data-lucide="mail"></i>Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-lg font-semibold mb-4 text-indigo-300">Fale Conosco</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start text-gray-400">
+                            <i class="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-indigo-400" data-lucide="map-pin"></i>
                             Maputo, Matola
                         </li>
-<li class="flex items-center text-gray-400">
-<i class="w-4 h-4 mr-3 text-indigo-400" data-lucide="phone"></i>
+                        <li class="flex items-center text-gray-400">
+                            <i class="w-4 h-4 mr-3 text-indigo-400" data-lucide="phone"></i>
                             (+258) 84-247-7140/86-896-8059
                         </li>
-<li class="flex items-center text-gray-400">
-<i class="w-4 h-4 mr-3 text-indigo-400" data-lucide="mail"></i>
+                        <li class="flex items-center text-gray-400">
+                            <i class="w-4 h-4 mr-3 text-indigo-400" data-lucide="mail"></i>
                             wecut005@gmail.com
                         </li>
-</ul>
-</div>
-</div>
-<div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-<p class="mb-2 md:mb-0">© <span id="current-year-footer"></span> WeCut. Todos os direitos reservados.
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p class="mb-2 md:mb-0">© <span id="current-year-footer"></span> WeCut. Todos os direitos reservados.
                 </p>
-<p class="text-xs">Desenvolvido com <i class="w-3 h-3 inline text-red-500" data-lucide="heart"></i> e
+                <p class="text-xs">Desenvolvido com <i class="w-3 h-3 inline text-red-500" data-lucide="heart"></i> e
                     dedicação.</p>
-</div>
-</div>
-</footer>
-<script>
+            </div>
+        </div>
+    </footer>
+    <script>
         // Define o ano atual no footer e garante que os novos ícones sejam renderizados
         document.getElementById('current-year-footer').textContent = new Date().getFullYear();
         // Re-renderiza os ícones do Lucide para incluir os do footer
@@ -576,6 +861,7 @@ body {
         }
     </script>
 </body>
+
 </html>
 <script>
     // State Manager
@@ -671,8 +957,7 @@ body {
                     image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
                     profileImage: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
                     location: 'Maputo',
-                    status: 'approved',
-                    isAvailable: true
+                    status: 'approved'
                 }
             ];
 
@@ -876,28 +1161,6 @@ body {
             handleLogout();
         });
     }
-
-    // === MENU HAMBURGER FUNCIONAL ===
-document.addEventListener('DOMContentLoaded', () => {
-  const mobileBtn = document.getElementById('v27-mobile-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuContent = document.getElementById('mobile-menu-content');
-
-  if (mobileBtn && mobileMenu) {
-    mobileBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  }
-
-  // Fecha o menu ao clicar em qualquer link dentro dele
-  if (menuContent) {
-    menuContent.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-      });
-    });
-  }
-});
 
     function handleLogout() {
         stateManager.setCurrentUser(null);
@@ -1119,8 +1382,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     profileImage: profilePhoto || 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
                     price: '45,00 MT',
                     location: salonData.location,
-                    status: 'approved',
-                    isAvailable: true
+                    status: 'approved'
                 });
 
                 stateManager.setCurrentUser(newUser);
@@ -1722,13 +1984,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 `).join('')}
                                             </div>
                                             <span class="text-sm font-medium text-gray-700">${pro.rating} (${pro.reviews})</span>
-                                        </div>
-                                        <button 
-                                            class="w-full bg-black text-white hover:bg-gray-800 py-2 rounded-lg font-semibold text-sm wecut-button-hover mt-2"
-                                        >
-                                            Ver Perfil
-                                        </button>
-                                    </div>
+                                      <div class="flex gap-2">
+    <button 
+        class="flex-1 bg-black text-white hover:bg-gray-800 py-2 rounded-lg font-semibold text-sm wecut-button-hover"
+    >
+        Ver Perfil
+    </button>
+    <button 
+        class="bg-blue-600 text-white hover:bg-blue-700 p-2 rounded-lg wecut-button-hover"
+        onclick="event.stopPropagation(); shareProfileLink(${pro.id})"
+        title="Compartilhar perfil"
+    >
+        <i data-lucide="share-2" class="w-4 h-4"></i>
+    </button>
+</div>
                                 </div>
                             `).join('') : `
                                 <div class="col-span-full text-center py-10 bg-white rounded-lg border border-gray-200 shadow-md">
@@ -2058,19 +2327,22 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h2 class="text-xl font-bold text-gray-900">${professional.name}</h2>
                             <p class="text-gray-600">${professional.specialty}</p>
                         </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <button onclick="renderView('professional-view-profile-page')" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
-                            <i data-lucide="user" class="w-4 h-4 mr-2"></i> Ver Perfil
-                        </button>
-                        <button onclick="renderView('professional-edit-profile-page')" class="bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
-                            <i data-lucide="edit" class="w-4 h-4 mr-2"></i> Editar Perfil
-                        </button>
-                        <button onclick="downloadProfessionalReport()" class="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
-                            <i data-lucide="download" class="w-4 h-4 mr-2"></i> Relatório
-                        </button>
-                    </div>
-                </div>
+                   
+                        <div class="flex gap-3 flex-wrap">
+    <button onclick="renderView('professional-view-profile-page')" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
+        <i data-lucide="user" class="w-4 h-4 mr-2"></i> Ver Perfil
+    </button>
+    <button onclick="renderView('professional-edit-profile-page')" class="bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
+        <i data-lucide="edit" class="w-4 h-4 mr-2"></i> Editar Perfil
+    </button>
+    <button onclick="shareProfileLink(${professional.id})" class="bg-purple-600 text-white hover:bg-purple-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
+        <i data-lucide="share-2" class="w-4 h-4 mr-2"></i> Compartilhar
+    </button>
+    <button onclick="downloadProfessionalReport()" class="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm wecut-button-hover flex items-center">
+        <i data-lucide="download" class="w-4 h-4 mr-2"></i> Relatório
+    </button>
+</div>
+                    </div>  
 
                 <!-- Métricas atualizadas -->
                 ${getProfessionalMetrics(professional.id)}
@@ -2329,34 +2601,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Outras Funções de UI/UX
     function showProfessionalDetailsModal(professionalId) {
-    const professional = stateManager.state.professionals.find(p => p.id === professionalId);
-    const salon = stateManager.state.salons.find(s => s.id === professional.salonId);
+        const professional = stateManager.state.professionals.find(p => p.id === professionalId);
+        const salon = stateManager.state.salons.find(s => s.id === professional.salonId);
 
-    if (!professional || !salon) {
-        alert('Profissional não encontrado.');
-        return;
-    }
+        if (!professional || !salon) {
+            alert('Profissional não encontrado.');
+            return;
+        }
 
-    const isUserAdmin = stateManager.state.currentUser?.type === 'admin';
-    const isAdminView = document.getElementById('remove-from-details');
+        const isUserAdmin = stateManager.state.currentUser?.type === 'admin';
+        const isAdminView = document.getElementById('remove-from-details');
 
-    if (isAdminView) {
-        isAdminView.onclick = () => removeProfessionalFromDetails(professionalId);
-        isAdminView.style.display = isUserAdmin ? 'block' : 'none';
-    }
+        if (isAdminView) {
+            isAdminView.onclick = () => removeProfessionalFromDetails(professionalId);
+            isAdminView.style.display = isUserAdmin ? 'block' : 'none';
+        }
 
-    // Conteúdo do Agendamento (Botão Agendar Horário)
-    const scheduleButton = `
+        // Conteúdo do Agendamento (Botões)
+        const scheduleButton = `
+    <div class="space-y-3">
         <button 
             class="w-full bg-black text-white hover:bg-gray-800 py-3 rounded-lg font-semibold wecut-button-hover flex items-center justify-center gap-2"
             onclick="openBookingSection(${professional.id})"
         >
             <i data-lucide="calendar" class="w-5 h-5"></i> Agendar Horário
         </button>
-    `;
+        <button 
+            class="w-full bg-blue-600 text-white hover:bg-blue-700 py-3 rounded-lg font-semibold wecut-button-hover flex items-center justify-center gap-2"
+            onclick="shareProfileLink(${professional.id})"
+        >
+            <i data-lucide="share-2" class="w-5 h-5"></i> Compartilhar Perfil
+        </button>
+    </div>
+`;
 
-    // Horário de Funcionamento
-    const openingHoursCard = `
+        // Horário de Funcionamento
+        const openingHoursCard = `
         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
             <h4 class="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
                 <i data-lucide="clock" class="w-5 h-5 text-black"></i> Horário de Funcionamento
@@ -2366,16 +2646,16 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Serviços
-    const servicesHtml = professional.services.map(service => `
+        // Serviços
+        const servicesHtml = professional.services.map(service => `
         <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
             <span class="font-medium text-gray-900">${service.name || service}</span>
             <span class="text-green-600 font-semibold">${service.price || '45,00 MT'}</span>
         </div>
     `).join('');
 
-    // Galeria
-    const galleryHtml = salon.photos && salon.photos.length > 0 ? `
+        // Galeria
+        const galleryHtml = salon.photos && salon.photos.length > 0 ? `
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             ${salon.photos.map(photo => `
                 <div class="aspect-square rounded-lg overflow-hidden border border-gray-300">
@@ -2385,9 +2665,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     ` : `<div class="text-center py-8 bg-gray-50 rounded-lg"><i data-lucide="camera" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i><p class="text-gray-600">Nenhuma foto cadastrada</p></div>`;
 
-    // Reviews
-    const reviews = stateManager.getProfessionalReviews(professionalId);
-    const reviewsHtml = reviews.length > 0 ? reviews.map(review => `
+        // Reviews
+        const reviews = stateManager.getProfessionalReviews(professionalId);
+        const reviewsHtml = reviews.length > 0 ? reviews.map(review => `
         <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
             <div class="flex items-center mb-2">
                 <div class="flex gap-1 text-yellow-500 mr-3">
@@ -2407,8 +2687,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Estrutura principal do Modal
-    const modalContent = `
+        // Estrutura principal do Modal
+        const modalContent = `
         <div class="professional-layout-container">
             <div class="professional-layout">
                 <div class="professional-main-content space-y-6">
@@ -2457,8 +2737,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Preencher o header do modal
-    document.getElementById('professional-details-title').innerHTML = `
+        // Preencher o header do modal
+        document.getElementById('professional-details-title').innerHTML = `
         <div class="flex items-center gap-4">
             <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-gray-300">
                 <img src="${professional.profileImage}" alt="${professional.name}" class="w-full h-full object-cover"/>
@@ -2470,16 +2750,16 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Inserir o novo corpo de conteúdo
-    document.getElementById('professional-details-content').innerHTML = modalContent;
+        // Inserir o novo corpo de conteúdo
+        document.getElementById('professional-details-content').innerHTML = modalContent;
 
-    // Recriar ícones lucide para o novo conteúdo
-    if (window.lucide) lucide.createIcons();
+        // Recriar ícones lucide para o novo conteúdo
+        if (window.lucide) lucide.createIcons();
 
-    // Mostrar o modal
-    const modalElement = document.getElementById('professional-details-modal');
-    modalElement.classList.remove('hidden');
-}
+        // Mostrar o modal
+        const modalElement = document.getElementById('professional-details-modal');
+        modalElement.classList.remove('hidden');
+    }
 
     function removeProfessionalFromDetails(professionalId) {
         closeProfessionalDetailsModal();
@@ -2490,45 +2770,45 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('professional-details-modal').classList.add('hidden');
     }
 
-    
+
 
     function closeRatingModal() {
         document.getElementById('rating-modal').classList.add('hidden');
     }
 
-function openBookingSection(professionalId) {
-    const professional = stateManager.state.professionals.find(p => p.id === professionalId);
-    const salon = stateManager.state.salons.find(s => s.id === professional?.salonId);
-    if (!professional || !salon) return alert('Profissional não encontrado.');
+    function openBookingSection(professionalId) {
+        const professional = stateManager.state.professionals.find(p => p.id === professionalId);
+        const salon = stateManager.state.salons.find(s => s.id === professional?.salonId);
+        if (!professional || !salon) return alert('Profissional não encontrado.');
 
-    // Remove qualquer instância anterior
-    const old = document.getElementById('fullscreen-booking');
-    if (old) old.remove();
+        // Remove qualquer instância anterior
+        const old = document.getElementById('fullscreen-booking');
+        if (old) old.remove();
 
-    // Fecha o modal de detalhes do profissional se estiver aberto
-    const detailsModal = document.getElementById('professional-details-modal');
-    if (detailsModal) detailsModal.classList.add('hidden');
+        // Fecha o modal de detalhes do profissional se estiver aberto
+        const detailsModal = document.getElementById('professional-details-modal');
+        if (detailsModal) detailsModal.classList.add('hidden');
 
-    // **CRÍTICO: Ocultar TUDO que está por trás**
-    const navbar = document.getElementById('navigation');
-    const pageContainer = document.getElementById('page-container');
-    const footer = document.querySelector('footer');
-    
-    if (navbar) navbar.style.display = 'none';
-    if (pageContainer) pageContainer.style.display = 'none';
-    if (footer) footer.style.display = 'none';
-    
-    // Remover padding e bloquear scroll do body
-    document.body.style.paddingTop = '0';
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed'; // **NOVO: Impede scroll completamente**
-    document.body.style.width = '100%';
-    document.body.style.height = '100%';
+        // **CRÍTICO: Ocultar TUDO que está por trás**
+        const navbar = document.getElementById('navigation');
+        const pageContainer = document.getElementById('page-container');
+        const footer = document.querySelector('footer');
 
-    // Cria seção fullscreen
-    const section = document.createElement('div');
-    section.id = 'fullscreen-booking';
-    section.style.cssText = `
+        if (navbar) navbar.style.display = 'none';
+        if (pageContainer) pageContainer.style.display = 'none';
+        if (footer) footer.style.display = 'none';
+
+        // Remover padding e bloquear scroll do body
+        document.body.style.paddingTop = '0';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed'; // **NOVO: Impede scroll completamente**
+        document.body.style.width = '100%';
+        document.body.style.height = '100%';
+
+        // Cria seção fullscreen
+        const section = document.createElement('div');
+        section.id = 'fullscreen-booking';
+        section.style.cssText = `
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
@@ -2546,9 +2826,9 @@ function openBookingSection(professionalId) {
         -webkit-overflow-scrolling: touch !important;
     `;
 
-    // Cabeçalho fixo no topo
-    const header = document.createElement('div');
-    header.style.cssText = `
+        // Cabeçalho fixo no topo
+        const header = document.createElement('div');
+        header.style.cssText = `
         position: sticky;
         top: 0;
         background: #ffffff;
@@ -2561,17 +2841,17 @@ function openBookingSection(professionalId) {
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         min-height: 64px;
     `;
-    
-    header.innerHTML = `
+
+        header.innerHTML = `
         <h2 class="text-lg md:text-xl font-semibold text-gray-900">Agendar com ${professional.name}</h2>
         <button id="close-booking" class="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-colors">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
     `;
 
-    // Conteúdo principal
-    const content = document.createElement('div');
-    content.style.cssText = `
+        // Conteúdo principal
+        const content = document.createElement('div');
+        content.style.cssText = `
         padding: 20px;
         padding-bottom: 40px;
         min-height: calc(100vh - 64px);
@@ -2584,7 +2864,7 @@ function openBookingSection(professionalId) {
         box-sizing: border-box;
     `;
 
-    content.innerHTML = `
+        content.innerHTML = `
         <div class="flex-1 w-full" style="background: #ffffff;">
             <div class="mb-8 w-full">
                 <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6">Escolha seu Serviço</h3>
@@ -2639,109 +2919,109 @@ function openBookingSection(professionalId) {
         </div>
     `;
 
-    // Função auxiliar para restaurar o estado original
-    function closeBooking() {
-        section.remove();
-        
-        // Restaurar TUDO
-        const navbar = document.getElementById('navigation');
-        const pageContainer = document.getElementById('page-container');
-        const footer = document.querySelector('footer');
-        
-        if (navbar) navbar.style.display = '';
-        if (pageContainer) pageContainer.style.display = '';
-        if (footer) footer.style.display = '';
-        
-        document.body.style.paddingTop = 'var(--nav-height)';
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.width = '';
-        document.body.style.height = '';
-    }
+        // Função auxiliar para restaurar o estado original
+        function closeBooking() {
+            section.remove();
 
-    // Event listener para fechar
-    header.querySelector('#close-booking').onclick = closeBooking;
+            // Restaurar TUDO
+            const navbar = document.getElementById('navigation');
+            const pageContainer = document.getElementById('page-container');
+            const footer = document.querySelector('footer');
 
-    // Atualizar total e estilo quando serviço for selecionado
-    content.querySelectorAll('.service-radio').forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            content.querySelectorAll('.service-radio').forEach(r => {
-                const label = r.closest('label');
-                label.style.borderColor = '#e5e7eb';
-                label.style.background = '#fff';
-                label.querySelector('.radio-check').classList.add('hidden');
+            if (navbar) navbar.style.display = '';
+            if (pageContainer) pageContainer.style.display = '';
+            if (footer) footer.style.display = '';
+
+            document.body.style.paddingTop = 'var(--nav-height)';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
+        }
+
+        // Event listener para fechar
+        header.querySelector('#close-booking').onclick = closeBooking;
+
+        // Atualizar total e estilo quando serviço for selecionado
+        content.querySelectorAll('.service-radio').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                content.querySelectorAll('.service-radio').forEach(r => {
+                    const label = r.closest('label');
+                    label.style.borderColor = '#e5e7eb';
+                    label.style.background = '#fff';
+                    label.querySelector('.radio-check').classList.add('hidden');
+                });
+
+                if (e.target.checked) {
+                    const label = e.target.closest('label');
+                    label.style.borderColor = '#10b981';
+                    label.style.background = '#f0fdf4';
+                    label.querySelector('.radio-check').classList.remove('hidden');
+
+                    const price = e.target.value.split('|')[1];
+                    content.querySelector('#total-display').textContent = `Total: ${price}`;
+                }
             });
-            
-            if (e.target.checked) {
-                const label = e.target.closest('label');
-                label.style.borderColor = '#10b981';
-                label.style.background = '#f0fdf4';
-                label.querySelector('.radio-check').classList.remove('hidden');
-                
-                const price = e.target.value.split('|')[1];
-                content.querySelector('#total-display').textContent = `Total: ${price}`;
+        });
+
+        // Confirmação de agendamento
+        content.querySelector('#confirm-booking').onclick = () => {
+            const selectedService = content.querySelector('input[name="selected-service"]:checked');
+            const date = content.querySelector('#booking-date').value;
+            const time = content.querySelector('#booking-time').value;
+
+            if (!selectedService) {
+                alert('Por favor, selecione um serviço.');
+                return;
             }
-        });
-    });
 
-    // Confirmação de agendamento
-    content.querySelector('#confirm-booking').onclick = () => {
-        const selectedService = content.querySelector('input[name="selected-service"]:checked');
-        const date = content.querySelector('#booking-date').value;
-        const time = content.querySelector('#booking-time').value;
+            if (!date || !time) {
+                alert('Por favor, selecione data e horário.');
+                return;
+            }
 
-        if (!selectedService) {
-            alert('Por favor, selecione um serviço.');
-            return;
+            const [service, price] = selectedService.value.split('|');
+
+            const conflict = stateManager.state.appointments.some(a =>
+                a.professionalId === professionalId &&
+                a.date === date &&
+                a.time === time
+            );
+
+            if (conflict) {
+                alert('❌ Este horário já está ocupado. Por favor, escolha outro.');
+                return;
+            }
+
+            stateManager.addAppointment({
+                professionalId,
+                clientName: stateManager.state.currentUser?.name || 'Cliente',
+                service: service,
+                date: date,
+                time: time,
+                price: price,
+                status: 'pending',
+                location: salon.location,
+                phone: salon.phone,
+                address: salon.address,
+                image: professional.image
+            });
+
+            alert('✅ Agendamento criado com sucesso!');
+            closeBooking();
+            renderView('search-page');
+        };
+
+        section.appendChild(header);
+        section.appendChild(content);
+        document.body.appendChild(section);
+
+        if (window.lucide) {
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
         }
-
-        if (!date || !time) {
-            alert('Por favor, selecione data e horário.');
-            return;
-        }
-
-        const [service, price] = selectedService.value.split('|');
-
-        const conflict = stateManager.state.appointments.some(a =>
-            a.professionalId === professionalId &&
-            a.date === date &&
-            a.time === time
-        );
-
-        if (conflict) {
-            alert('❌ Este horário já está ocupado. Por favor, escolha outro.');
-            return;
-        }
-
-        stateManager.addAppointment({
-            professionalId,
-            clientName: stateManager.state.currentUser?.name || 'Cliente',
-            service: service,
-            date: date,
-            time: time,
-            price: price,
-            status: 'pending',
-            location: salon.location,
-            phone: salon.phone,
-            address: salon.address,
-            image: professional.image
-        });
-
-        alert('✅ Agendamento criado com sucesso!');
-        closeBooking();
-        renderView('search-page');
-    };
-
-    section.appendChild(header);
-    section.appendChild(content);
-    document.body.appendChild(section);
-
-    if (window.lucide) {
-        setTimeout(() => {
-            lucide.createIcons();
-        }, 100);
     }
-}
 
     function showRatingModal(appointmentId) {
         document.getElementById('rating-appointment-id').value = appointmentId;
@@ -2788,7 +3068,7 @@ function openBookingSection(professionalId) {
         renderView('appointments-page');
     }
 
-    
+
     function generateTimeSlots(open, close, interval) {
         let slots = '';
         let currentTime = new Date();
@@ -3123,34 +3403,34 @@ function openBookingSection(professionalId) {
     });
 
 
-// === BLOQUEIO DE AVALIAÇÃO DUPLICADA ===
-function canRateOncePerService(clientName, professionalId, serviceName) {
-    const previousRatings = stateManager.state.reviews.filter(r =>
-        r.clientName === clientName &&
-        r.professionalId === professionalId &&
-        r.serviceName === serviceName
-    );
-    return previousRatings.length === 0;
-}
-
-// Substituir submitRating para verificar a condição
-const oldSubmitRating = window.submitRating;
-window.submitRating = function(event) {
-    event.preventDefault();
-    const clientName = stateManager.state.currentUser?.name;
-    const appointmentId = document.getElementById('rating-appointment-id').value;
-    const appointment = stateManager.state.appointments.find(a => a.id == appointmentId);
-    if (!appointment) return alert('Erro: agendamento não encontrado.');
-
-    const { professionalId, service } = appointment;
-    if (!canRateOncePerService(clientName, professionalId, service)) {
-        alert('Você já avaliou este profissional para este serviço.');
-        return;
+    // === BLOQUEIO DE AVALIAÇÃO DUPLICADA ===
+    function canRateOncePerService(clientName, professionalId, serviceName) {
+        const previousRatings = stateManager.state.reviews.filter(r =>
+            r.clientName === clientName &&
+            r.professionalId === professionalId &&
+            r.serviceName === serviceName
+        );
+        return previousRatings.length === 0;
     }
 
-    // Se não houver avaliações duplicadas, executa o original
-    if (typeof oldSubmitRating === 'function') {
-        oldSubmitRating(event);
-    }
-};
+    // Substituir submitRating para verificar a condição
+    const oldSubmitRating = window.submitRating;
+    window.submitRating = function (event) {
+        event.preventDefault();
+        const clientName = stateManager.state.currentUser?.name;
+        const appointmentId = document.getElementById('rating-appointment-id').value;
+        const appointment = stateManager.state.appointments.find(a => a.id == appointmentId);
+        if (!appointment) return alert('Erro: agendamento não encontrado.');
+
+        const { professionalId, service } = appointment;
+        if (!canRateOncePerService(clientName, professionalId, service)) {
+            alert('Você já avaliou este profissional para este serviço.');
+            return;
+        }
+
+        // Se não houver avaliabnções duplicadas, executa o original
+        if (typeof oldSubmitRating === 'function') {
+            oldSubmitRating(event);
+        }
+    };
 </script>
