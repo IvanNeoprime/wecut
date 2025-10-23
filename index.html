@@ -1054,7 +1054,7 @@
         }
 
         getApprovedProfessionals() {
-            // Agora filtra por 'status' (admin-approved) E 'isAvailable' (self-managed)
+            // Filtra por 'status' (admin-approved) E 'isAvailable' (self-managed)
             return this.state.professionals.filter(pro => pro.status === 'approved' && pro.isAvailable === true);
         }
 
@@ -1378,11 +1378,12 @@
                     services: allServices,
                     rating: 0,
                     reviews: 0,
-                    image: salonPhotos.length > 0 ? salonPhotos[0] : 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
-                    profileImage: profilePhoto || 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFpcmRyZXNzZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+                    image: salonPhotos.length > 0 ? salonPhotos[0] : null,  // ← MUDANÇA AQUI
+                    profileImage: profilePhoto || null,  // ← MUDANÇA AQUI
                     price: '45,00 MT',
                     location: salonData.location,
-                    status: 'approved'
+                    status: 'approved',
+                    isAvailable: true
                 });
 
                 stateManager.setCurrentUser(newUser);
@@ -1956,63 +1957,63 @@
                     </div>
                 </section>
 
-                <section class="py-16 bg-gray-50">
-                    <div class="max-w-7xl mx-auto px-4">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-                            Profissionais em Destaque
-                        </h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                            ${professionals.length > 0 ? professionals.slice(0, 4).map(pro => `
-                                <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 cursor-pointer" onclick="showProfessionalDetailsModal(${pro.id})">
-                                    <div class="relative h-48 overflow-hidden rounded-t-lg">
-                                        <img 
-                                            src="${pro.image}" 
-                                            alt="${pro.name}" 
-                                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                        />
-                                        <div class="absolute top-2 right-2 bg-black text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                            ${pro.location}
-                                        </div>
-                                    </div>
-                                    <div class="p-4">
-                                        <h3 class="text-xl font-bold text-gray-900 mb-1 truncate">${pro.name}</h3>
-                                        <p class="text-sm text-gray-600 mb-3">${pro.specialty}</p>
-                                        <div class="flex items-center gap-2 mb-3">
-                                            <div class="flex gap-1 text-yellow-500">
-                                                ${Array(5).fill().map((_, i) => `
-                                                    <i data-lucide="star" class="w-4 h-4 ${i < Math.floor(pro.rating) ? 'fill-yellow-500 stroke-yellow-500' : 'stroke-gray-300'}"></i>
-                                                `).join('')}
-                                            </div>
-                                            <span class="text-sm font-medium text-gray-700">${pro.rating} (${pro.reviews})</span>
-                                      <div class="flex gap-2">
-    <button 
-        class="flex-1 bg-black text-white hover:bg-gray-800 py-2 rounded-lg font-semibold text-sm wecut-button-hover"
-    >
-        Ver Perfil
-    </button>
-    <button 
-        class="bg-blue-600 text-white hover:bg-blue-700 p-2 rounded-lg wecut-button-hover"
-        onclick="event.stopPropagation(); shareProfileLink(${pro.id})"
-        title="Compartilhar perfil"
-    >
-        <i data-lucide="share-2" class="w-4 h-4"></i>
-    </button>
-</div>
-                                </div>
-                            `).join('') : `
-                                <div class="col-span-full text-center py-10 bg-white rounded-lg border border-gray-200 shadow-md">
-                                    <i data-lucide="search-x" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
-                                    <p class="text-gray-600">Nenhum profissional encontrado. Tente novamente mais tarde.</p>
-                                </div>
-                            `}
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Profissionais em Destaque
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            ${professionals.length > 0 ? professionals.slice(0, 4).map(pro => `
+                <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 cursor-pointer" onclick="showProfessionalDetailsModal(${pro.id})">
+                    <div class="relative h-36 overflow-hidden rounded-t-lg">
+                        <img 
+                            src="${pro.image}" 
+                            alt="${pro.name}" 
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                        <div class="absolute top-2 right-2 bg-black text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            ${pro.location}
                         </div>
-                        <div class="text-center mt-12">
-                            <button onclick="renderView('search-page')" class="bg-gray-200 text-black hover:bg-gray-300 px-6 py-3 rounded-lg font-semibold wecut-button-hover">
-                                Ver Todos os Profissionais
+                    </div>
+                    
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1 truncate">${pro.name}</h3>
+                        <p class="text-sm text-gray-600 mb-3">${pro.specialty}</p>
+                        
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="flex gap-1 text-yellow-500">
+                                ${Array(5).fill().map((_, i) => `
+                                    <i data-lucide="star" class="w-4 h-4 ${i < Math.floor(pro.rating) ? 'fill-yellow-500 stroke-yellow-500' : 'stroke-gray-300'}"></i>
+                                `).join('')}
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">${pro.rating} (${pro.reviews})</span>
+                        </div>
+                        
+                        <div>
+                            <button 
+                                class="w-full bg-black text-white hover:bg-gray-800 py-2 rounded-lg font-semibold text-sm wecut-button-hover"
+                                onclick="event.stopPropagation(); showProfessionalDetailsModal(${pro.id})"
+                            >
+                                Ver Perfil
                             </button>
                         </div>
                     </div>
-                </section>
+                </div>
+            `).join('') : `
+                <div class="col-span-full text-center py-10 bg-white rounded-lg border border-gray-200 shadow-md">
+                    <i data-lucide="search-x" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
+                    <p class="text-gray-600">Nenhum profissional encontrado. Tente novamente mais tarde.</p>
+                </div>
+            `}
+        </div>
+        
+        <div class="text-center mt-12">
+            <button onclick="renderView('search-page')" class="bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-semibold wecut-button-hover">
+                Ver Todos os Profissionais
+            </button>
+        </div>
+    </div>
+</section>
 
                 <section class="py-20 bg-white">
                     <div class="max-w-7xl mx-auto px-4 text-center">
@@ -2616,6 +2617,8 @@
             isAdminView.onclick = () => removeProfessionalFromDetails(professionalId);
             isAdminView.style.display = isUserAdmin ? 'block' : 'none';
         }
+
+        
 
         // Conteúdo do Agendamento (Botões)
         const scheduleButton = `
